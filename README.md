@@ -14,7 +14,7 @@ Este repositório reúne toda a organização e documentação da cidade, dividi
 
 ---
 
-## 🧪 Casa da Moeda  
+## 💰 Casa da Moeda  
 - Avaliação dos valores de itens, lojas e poções.  
 - Administração e proteção do dinheiro dos aventureiros.  
 - Criação e valorização de moedas e cédulas.  
