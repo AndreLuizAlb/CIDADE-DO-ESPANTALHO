@@ -1,0 +1,3050 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Centro de Informações - Vale do Espantalho</title>
+    <style>
+        :root {
+            --main-bg: #2e4f2e;
+            --gradient-bg: linear-gradient(135deg, #2e4f2e, #4a7043);
+            --border-color: #8b5a2b;
+            --shadow-color: #5c4033;
+            --text-color: #f5f5f5;
+            --accent-color: #ffcc00;
+            --secondary-bg: rgba(46, 79, 46, 0.8);
+            --heading-font: 'Arial Black', sans-serif;
+            --body-font: 'Arial', sans-serif;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            background: var(--gradient-bg);
+            color: var(--text-color);
+            font-family: var(--body-font);
+            line-height: 1.6;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: var(--heading-font);
+            font-weight: bold;
+        }
+
+        /* Menu de navegação */
+        .nav-container {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            gap: 10px;
+            z-index: 1000;
+        }
+        
+        .nav-menu, .color-menu {
+            position: relative;
+        }
+        
+        .nav-button, .color-button {
+            background-color: var(--main-bg);
+            color: var(--accent-color);
+            border: 4px solid var(--border-color);
+            padding: 12px 20px;
+            font-family: var(--body-font);
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            box-shadow: 0 6px 0 var(--shadow-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-decoration: none;
+        }
+        
+        .nav-button:hover, .color-button:hover {
+            transform: translateY(3px);
+            box-shadow: 0 3px 0 var(--shadow-color);
+            background-color: var(--shadow-color);
+        }
+        
+        .nav-button:active, .color-button:active {
+            transform: translateY(6px);
+            box-shadow: none;
+        }
+        
+        .nav-dropdown, .color-dropdown {
+            display: none;
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background: var(--secondary-bg);
+            border: 4px solid var(--border-color);
+            box-shadow: 0 6px 0 var(--shadow-color);
+            min-width: 200px;
+        }
+        
+        .nav-dropdown a, .color-dropdown button {
+            display: block;
+            color: var(--text-color);
+            padding: 10px 15px;
+            text-decoration: none;
+            font-family: var(--body-font);
+            font-size: 1rem;
+            text-transform: uppercase;
+            transition: background-color 0.2s;
+            background: none;
+            border: none;
+            width: 100%;
+            text-align: left;
+            cursor: pointer;
+        }
+        
+        .nav-dropdown a:hover, .color-dropdown button:hover {
+            background-color: var(--shadow-color);
+        }
+        
+        .nav-menu:hover .nav-dropdown, .color-menu:hover .color-dropdown {
+            display: block;
+        }
+
+        /* Cabeçalho */
+        .header {
+            background: var(--secondary-bg);
+            border-bottom: 4px solid var(--border-color);
+            box-shadow: 0 6px 0 var(--shadow-color);
+            padding: 20px 0;
+            position: relative;
+            z-index: 999;
+        }
+
+        .header-content {
+            max-width: 100%; /* Alterado para full width */
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .logo-image {
+            width: 80px;
+            height: 80px;
+            background: #333;
+            border: 3px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            image-rendering: pixelated;
+            font-size: 2rem;
+        }
+
+        .logo-text {
+            text-align: left;
+        }
+
+        .logo-text h1 {
+            color: var(--accent-color);
+            font-size: 3rem;
+            text-shadow: 3px 3px 0 var(--shadow-color);
+            letter-spacing: 2px;
+            margin-bottom: 5px;
+        }
+
+        .logo-text .subtitle {
+            color: var(--text-color);
+            font-size: 1.5rem;
+            text-shadow: 2px 2px 0 var(--shadow-color);
+        }
+
+        .header-nav {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .header-nav-item {
+            background-color: var(--main-bg);
+            color: var(--text-color);
+            border: 3px solid var(--border-color);
+            padding: 8px 16px;
+            font-family: var(--body-font);
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            box-shadow: 0 4px 0 var(--shadow-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-decoration: none;
+        }
+
+        .header-nav-item:hover {
+            transform: translateY(2px);
+            box-shadow: 0 2px 0 var(--shadow-color);
+            background-color: var(--shadow-color);
+        }
+
+        /* Container principal */
+        .container {
+            max-width: 100%; /* Alterado para full width */
+            margin: 0 auto;
+            padding: 40px 20px;
+            flex: 1;
+        }
+
+        /* Seção do jornal */
+        .newspaper-section {
+            background: var(--secondary-bg);
+            border: 4px solid var(--border-color);
+            padding: 40px;
+            margin-bottom: 40px;
+            box-shadow: 0 8px 0 var(--shadow-color);
+            text-align: center;
+            position: relative;
+        }
+
+        .newspaper-title {
+            color: var(--accent-color);
+            font-size: 3.5rem;
+            text-shadow: 3px 3px 0 var(--shadow-color);
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .newspaper-subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+            color: var(--text-color);
+        }
+
+        .newspaper-date {
+            background: var(--accent-color);
+            color: #000;
+            padding: 10px 20px;
+            border: 3px solid var(--border-color);
+            display: inline-block;
+            font-weight: bold;
+            text-transform: uppercase;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 0 var(--shadow-color);
+            font-size: 1.2rem;
+        }
+
+        /* Notícias */
+        .news-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+        }
+
+        .news-article {
+            background: var(--secondary-bg);
+            border: 4px solid var(--border-color);
+            padding: 25px;
+            box-shadow: 0 8px 0 var(--shadow-color);
+            transition: transform 0.2s;
+            position: relative;
+        }
+
+        .news-article:hover {
+            transform: translateY(-3px);
+        }
+
+        .news-category {
+            background: var(--accent-color);
+            color: #000;
+            padding: 5px 12px;
+            border: 2px solid var(--border-color);
+            display: inline-block;
+            font-size: 1rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 0 var(--shadow-color);
+        }
+
+        .news-title {
+            color: var(--accent-color);
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .news-date {
+            color: var(--text-color);
+            font-size: 1rem;
+            margin-bottom: 15px;
+            opacity: 0.8;
+        }
+
+        .news-content {
+            font-size: 1.1rem;
+            line-height: 1.8; /* Melhorado para maior espaçamento */
+            text-align: justify;
+            white-space: pre-wrap; /* Permite quebras de linha */
+        }
+
+        .news-content strong {
+            font-weight: bold;
+            color: var(--accent-color); /* Destaque para negrito */
+        }
+
+        .news-content em {
+            font-style: italic;
+            color: #ddd; /* Destaque sutil para itálico */
+        }
+
+        .news-content h5 {
+            font-size: 1.3rem;
+            margin-top: 10px;
+            color: var(--accent-color);
+        }
+
+        .news-image {
+            width: 100%;
+            height: 200px;
+            background: #333;
+            border: 3px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 15px;
+            font-size: 3rem;
+            color: var(--accent-color);
+        }
+
+        .news-image img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+        }
+
+        .admin-buttons {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            display: flex;
+            gap: 5px;
+        }
+
+        .admin-button {
+            background: var(--accent-color);
+            color: #000;
+            border: 2px solid var(--border-color);
+            padding: 5px 10px;
+            font-size: 0.8rem;
+            cursor: pointer;
+            font-family: var(--body-font);
+            text-transform: uppercase;
+            transition: all 0.2s;
+            box-shadow: 0 2px 0 var(--shadow-color);
+        }
+
+        .admin-button:hover {
+            transform: translateY(1px);
+            box-shadow: 0 1px 0 var(--shadow-color);
+        }
+
+        /* Arena de eventos */
+        .arena-section {
+            background: var(--secondary-bg);
+            border: 4px solid var(--border-color);
+            padding: 30px;
+            margin: 40px 0;
+            box-shadow: 0 8px 0 var(--shadow-color);
+        }
+
+        .section-title {
+            color: var(--accent-color);
+            font-size: 2.8rem;
+            text-shadow: 2px 2px 0 var(--shadow-color);
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-align: center;
+        }
+
+        .arena-image {
+            width: 100%;
+            height: 250px;
+            background: #333;
+            border: 3px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 30px;
+            font-size: 4rem;
+            color: var(--accent-color);
+            background-image: linear-gradient(45deg, #333 25%, transparent 25%), 
+                              linear-gradient(-45deg, #333 25%, transparent 25%), 
+                              linear-gradient(45deg, transparent 75%, #333 75%), 
+                              linear-gradient(-45deg, transparent 75%, #333 75%);
+            background-size: 20px 20px;
+            background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
+        }
+
+        .events-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 0;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .tab-button {
+            background: var(--main-bg);
+            color: var(--text-color);
+            border: 3px solid var(--border-color);
+            padding: 15px 25px;
+            font-family: var(--body-font);
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-right: none;
+        }
+
+        .tab-button:last-child {
+            border-right: 3px solid var(--border-color);
+        }
+
+        .tab-button.active {
+            background: var(--accent-color);
+            color: #000;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 0 var(--shadow-color);
+        }
+
+        .tab-button:not(.active):hover {
+            background: var(--shadow-color);
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        /* Seletor de tipo de evento */
+        .event-type-selector {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .event-type-button {
+            background: var(--main-bg);
+            color: var(--text-color);
+            border: 3px solid var(--border-color);
+            padding: 10px 20px;
+            font-family: var(--body-font);
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 3px 0 var(--shadow-color);
+        }
+
+        .event-type-button:hover {
+            transform: translateY(2px);
+            box-shadow: 0 1px 0 var(--shadow-color);
+        }
+
+        .event-list {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .event-card {
+            background: var(--main-bg);
+            border: 3px solid var(--border-color);
+            padding: 25px;
+            display: flex;
+            align-items: flex-start;
+            gap: 25px;
+            box-shadow: 0 6px 0 var(--shadow-color);
+            transition: transform 0.2s;
+            position: relative;
+        }
+
+        .event-card:hover {
+            transform: translateY(-2px);
+        }
+
+        .event-icon {
+            width: 120px;
+            height: 120px;
+            background: var(--accent-color);
+            border: 3px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3.5rem;
+            color: #000;
+            flex-shrink: 0;
+        }
+
+        .event-icon img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .event-icon.pixelated img {
+            image-rendering: pixelated;
+        }
+
+        .event-details {
+            flex: 1;
+        }
+
+        .event-title {
+            color: var(--accent-color);
+            font-size: 1.8rem;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .event-date-location {
+            color: var(--text-color);
+            font-size: 1.1rem;
+            margin-bottom: 12px;
+            opacity: 0.9;
+        }
+
+        .event-description {
+            font-size: 1.1rem;
+            line-height: 1.5;
+        }
+
+        /* Cards de luta específicos */
+        .fight-card {
+            background: var(--main-bg);
+            border: 3px solid #8b0000;
+            padding: 25px;
+            box-shadow: 0 6px 0 #5c0000;
+            position: relative;
+            border-left: 8px solid #ff4444;
+        }
+
+        .fight-card .event-title {
+            color: #ff6666;
+        }
+
+        .health-bar-container {
+            margin: 15px 0;
+        }
+
+        .health-label {
+            color: #ff6666;
+            font-size: 1.1rem;
+            font-weight: bold;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+        }
+
+        .health-display {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .health-bar {
+            flex: 1;
+            height: 30px;
+            background: #333;
+            border: 3px solid var(--border-color);
+            position: relative;
+            min-width: 200px;
+        }
+
+        .health-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #ff4444, #ffaa44);
+            transition: width 0.3s ease;
+            position: relative;
+        }
+
+        .health-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            font-weight: bold;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.7);
+            font-size: 0.9rem;
+        }
+
+        .health-controls {
+            display: flex;
+            gap: 8px;
+        }
+
+        .health-button {
+            background: var(--accent-color);
+            color: #000;
+            border: 2px solid var(--border-color);
+            width: 35px;
+            height: 35px;
+            cursor: pointer;
+            font-family: var(--body-font);
+            font-size: 1rem;
+            font-weight: bold;
+            transition: all 0.2s;
+            box-shadow: 0 2px 0 var(--shadow-color);
+        }
+
+        .health-button:hover {
+            transform: translateY(1px);
+            box-shadow: 0 1px 0 var(--shadow-color);
+        }
+
+        .health-button.decrease {
+            background: #ff4444;
+            color: white;
+        }
+
+        .health-button.increase {
+            background: #44ff44;
+            color: #000;
+        }
+
+        .health-button.max {
+            width: auto;
+            padding: 0 10px;
+            background: #00bfff;
+            color: #000;
+        }
+
+        .deadline-info {
+            background: rgba(255, 68, 68, 0.2);
+            border: 2px solid #ff4444;
+            padding: 10px;
+            margin-top: 15px;
+            border-radius: 5px;
+        }
+
+        .deadline-label {
+            color: #ff6666;
+            font-weight: bold;
+            text-transform: uppercase;
+            margin-bottom: 5px;
+        }
+
+        .deadline-text {
+            color: var(--text-color);
+            font-size: 0.9rem;
+        }
+
+        /* Novas classes para toggles de ataques */
+        .opponent-section {
+            margin-top: 20px;
+            padding-top: 15px;
+            border-top: 2px dashed var(--border-color);
+        }
+
+        .opponent-section-title {
+            color: var(--accent-color);
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+
+        .attack-item {
+            margin-bottom: 10px;
+            border: 1px solid var(--border-color);
+            padding: 10px;
+            position: relative;
+        }
+
+        .toggle-button {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            font-size: 1.2rem;
+            color: var(--accent-color);
+        }
+
+        .hidden-content {
+            display: none;
+            margin-top: 10px;
+            padding: 10px;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 5px;
+        }
+
+        /* Classes para recompensas */
+        .reward-item {
+            margin-bottom: 15px;
+            padding: 10px;
+            border: 1px solid var(--border-color);
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .reward-image {
+            width: 50px;
+            height: 50px;
+            background: #333;
+            border: 2px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: var(--accent-color);
+        }
+
+        .reward-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .reward-details {
+            flex: 1;
+        }
+
+        /* Estilos para form dinâmico de recompensas */
+        .reward-form-item {
+            border: 1px solid var(--border-color);
+            padding: 10px;
+            margin-bottom: 10px;
+            position: relative;
+        }
+
+        .remove-reward {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            background: #ff4444;
+            color: white;
+            border: none;
+            cursor: pointer;
+            padding: 5px;
+        }
+
+        /* Novas classes para seções expansíveis */
+        .expandable-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            cursor: pointer;
+            padding: 10px;
+            background: var(--shadow-color);
+            border: 2px solid var(--border-color);
+            margin-top: 15px;
+            transition: background 0.2s;
+        }
+
+        .expandable-header:hover {
+            background: var(--main-bg);
+        }
+
+        .expand-arrow {
+            font-size: 1.2rem;
+            transition: transform 0.3s;
+        }
+
+        .expand-arrow.expanded {
+            transform: rotate(90deg);
+        }
+
+        .expandable-content {
+            display: none;
+            padding: 15px;
+            border: 2px solid var(--border-color);
+            border-top: none;
+            line-height: 1.8; /* Melhor espaçamento */
+        }
+
+        .expandable-content strong {
+            font-weight: bold;
+            color: var(--accent-color);
+        }
+
+        .expandable-content em {
+            font-style: italic;
+            color: #ddd;
+        }
+
+        .expandable-content h5 {
+            font-size: 1.3rem;
+            margin-top: 10px;
+            color: var(--accent-color);
+        }
+
+        /* Grid para ataques */
+        .attacks-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+
+        .attack-item {
+            border: 1px solid var(--border-color);
+            padding: 15px;
+            font-size: 1.1rem;
+            position: relative;
+        }
+
+        .attack-item h6 {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+        }
+
+        .hidden-content {
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+
+        /* Avisos importantes */
+        .notices-section {
+            background: var(--secondary-bg);
+            border: 4px solid var(--border-color);
+            padding: 30px;
+            margin: 40px 0;
+            box-shadow: 0 8px 0 var(--shadow-color);
+            position: relative;
+        }
+
+        .notices-section::before {
+            content: "";
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            right: -10px;
+            bottom: -10px;
+            border: 2px dashed var(--accent-color);
+            opacity: 0.5;
+            animation: dashedGlow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes dashedGlow {
+            0% { opacity: 0.3; }
+            100% { opacity: 0.7; }
+        }
+
+        /* Estilos para o novo mural de avisos importantes (mais destacado) */
+        .notices-section.important {
+            border-color: #ff4444;
+            box-shadow: 0 8px 0 #ff0000;
+        }
+
+        .notices-section.important::before {
+            border-color: #ff0000;
+            animation: dashedGlowRed 1s ease-in-out infinite alternate;
+        }
+
+        @keyframes dashedGlowRed {
+            0% { opacity: 0.3; box-shadow: 0 0 10px rgba(255,0,0,0.5); }
+            100% { opacity: 0.8; box-shadow: 0 0 20px rgba(255,0,0,1); }
+        }
+
+        .notice-board {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .notice-item {
+            background: #fff8dc;
+            color: #333;
+            border: 3px solid var(--border-color);
+            padding: 20px;
+            position: relative;
+            box-shadow: 0 4px 0 var(--shadow-color);
+            transform: rotate(-1deg);
+            transition: transform 0.2s;
+        }
+
+        .notice-item:nth-child(even) {
+            transform: rotate(1deg);
+        }
+
+        .notice-item:hover {
+            transform: rotate(0deg) scale(1.02);
+        }
+
+        .notice-item::before {
+            content: "📌";
+            position: absolute;
+            top: -10px;
+            right: 20px;
+            font-size: 1.5rem;
+            background: var(--accent-color);
+            border-radius: 50%;
+            padding: 5px;
+        }
+
+        .notice-priority {
+            background: var(--accent-color);
+            color: #000;
+            padding: 3px 8px;
+            font-size: 1rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            display: inline-block;
+            margin-bottom: 10px;
+            border: 1px solid #333;
+        }
+
+        .notice-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #8b4513;
+            text-transform: uppercase;
+        }
+
+        .notice-content {
+            font-size: 1.1rem;
+            line-height: 1.8; /* Melhor espaçamento */
+            margin-bottom: 10px;
+            white-space: pre-wrap;
+        }
+
+        .notice-content strong {
+            font-weight: bold;
+            color: var(--accent-color);
+        }
+
+        .notice-content em {
+            font-style: italic;
+            color: #666;
+        }
+
+        .notice-content h5 {
+            font-size: 1.3rem;
+            margin-top: 10px;
+            color: var(--accent-color);
+        }
+
+        .notice-date {
+            font-size: 1rem;
+            color: #666;
+            font-style: italic;
+        }
+
+        /* Classes para prioridades (para destacar urgência) */
+        .notice-item.notice-urgente {
+            background: #ffdddd;
+            border-color: #ff0000;
+            animation: blink 1s infinite alternate;
+        }
+
+        .notice-item.notice-importante {
+            background: #fff0cc;
+            border-color: #ffa500;
+        }
+
+        .notice-item.notice-informacao {
+            background: #e6f7ff;
+            border-color: #1890ff;
+        }
+
+        .notice-item.notice-comunidade {
+            background: #f0fff4;
+            border-color: #52c41a;
+        }
+
+        .notice-item.notice-evento {
+            background: #f9f0ff;
+            border-color: #722ed1;
+        }
+
+        .notice-item.notice-procura-se {
+            background: #fff2e8;
+            border-color: #d4380d;
+        }
+
+        @keyframes blink {
+            0% { opacity: 1; }
+            100% { opacity: 0.6; }
+        }
+
+        /* Nova seção para distritos */
+        .districts-section {
+            background: var(--secondary-bg);
+            border: 4px solid var(--border-color);
+            padding: 30px;
+            margin: 40px 0;
+            box-shadow: 0 8px 0 var(--shadow-color);
+        }
+
+        .districts-grid {
+            display: grid;
+            grid-template-columns: 1fr; /* Alterado para uma coluna, cada distrito full width */
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .district-card {
+            background: var(--main-bg);
+            border: 3px solid var(--border-color);
+            box-shadow: 0 6px 0 var(--shadow-color);
+            transition: transform 0.2s;
+            position: relative;
+        }
+
+        .district-card:hover {
+            transform: translateY(-3px);
+        }
+
+        .district-title {
+            color: var(--accent-color);
+            font-size: 1.6rem;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            padding: 10px;
+            background: var(--shadow-color);
+            border-bottom: 2px solid var(--border-color);
+        }
+
+        .district-description {
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+            line-height: 1.8;
+            padding: 10px;
+        }
+
+        .district-topics {
+            list-style-type: none;
+            padding: 10px;
+        }
+
+        .district-topics li {
+            margin-bottom: 10px;
+            position: relative;
+            padding-left: 20px;
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+
+        .district-topics li::before {
+            content: "📌";
+            position: absolute;
+            left: 0;
+        }
+
+        .district-content {
+            display: none;
+            padding: 10px;
+            border-top: 1px solid var(--border-color);
+        }
+
+        /* Galeria de imagens */
+        .gallery-section {
+            background: var(--secondary-bg);
+            border: 4px solid var(--border-color);
+            padding: 30px;
+            margin: 40px 0;
+            box-shadow: 0 8px 0 var(--shadow-color);
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .gallery-item {
+            background: var(--main-bg);
+            border: 3px solid var(--border-color);
+            padding: 15px;
+            text-align: center;
+            box-shadow: 0 6px 0 var(--shadow-color);
+            transition: transform 0.2s;
+            cursor: pointer;
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-3px);
+        }
+
+        .gallery-image {
+            width: 100%;
+            height: 180px;
+            background: #333;
+            border: 2px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 15px;
+            font-size: 3rem;
+            color: var(--accent-color);
+        }
+
+        .gallery-caption {
+            color: var(--accent-color);
+            font-size: 1.2rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+        }
+
+        .modal.show {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background: var(--secondary-bg);
+            border: 4px solid var(--border-color);
+            box-shadow: 0 8px 0 var(--shadow-color);
+            padding: 40px;
+            max-width: 800px;
+            max-height: 80vh;
+            overflow-y: auto;
+            margin: 20px;
+            position: relative;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            background: var(--accent-color);
+            color: #000;
+            border: 3px solid var(--border-color);
+            width: 40px;
+            height: 40px;
+            font-size: 1.5rem;
+            font-weight: bold;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 3px 0 var(--shadow-color);
+            transition: all 0.2s;
+            font-family: var(--body-font);
+        }
+
+        .modal-close:hover {
+            transform: translateY(2px);
+            box-shadow: 0 1px 0 var(--shadow-color);
+        }
+
+        .modal-header {
+            color: var(--accent-color);
+            font-size: 2.2rem;
+            text-shadow: 2px 2px 0 var(--shadow-color);
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .modal-text {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+
+        .modal form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .modal input, .modal textarea, .modal select {
+            padding: 12px;
+            background: var(--main-bg);
+            color: var(--text-color);
+            border: 2px solid var(--border-color);
+            font-family: var(--body-font);
+            font-size: 1rem;
+        }
+
+        .modal input::placeholder, .modal textarea::placeholder {
+            color: rgba(245, 245, 245, 0.6);
+        }
+
+        .modal button[type="submit"] {
+            background: var(--accent-color);
+            color: #000;
+            border: 3px solid var(--border-color);
+            padding: 12px;
+            cursor: pointer;
+            font-family: var(--body-font);
+            font-size: 1rem;
+            text-transform: uppercase;
+            font-weight: bold;
+            box-shadow: 0 4px 0 var(--shadow-color);
+            transition: all 0.2s;
+        }
+
+        .modal button[type="submit"]:hover {
+            transform: translateY(2px);
+            box-shadow: 0 2px 0 var(--shadow-color);
+        }
+
+        #switch-auth {
+            background: var(--main-bg);
+            color: var(--text-color);
+            border: 2px solid var(--border-color);
+            padding: 10px;
+            cursor: pointer;
+            font-family: var(--body-font);
+            margin-top: 10px;
+        }
+
+        /* Input para upload de imagem */
+        .image-input-container {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .image-preview {
+            width: 120px;
+            height: 120px;
+            border: 2px solid var(--border-color);
+            background: #333;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--accent-color);
+            font-size: 3rem;
+        }
+
+        .image-preview img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        /* Health input específico */
+        .health-input-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .health-input {
+            width: 80px;
+        }
+
+        /* Notificações */
+        .notification {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--accent-color);
+            color: #000;
+            padding: 15px 20px;
+            border: 3px solid var(--border-color);
+            box-shadow: 0 4px 0 var(--shadow-color);
+            z-index: 1001;
+            font-family: var(--body-font);
+            font-weight: bold;
+            opacity: 0;
+            transform: translateX(100%);
+            transition: all 0.3s ease;
+            max-width: 300px;
+            word-wrap: break-word;
+        }
+
+        .notification.show {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .notification.success {
+            background: #2ed573;
+            color: #fff;
+        }
+
+        .notification.error {
+            background: #ff4757;
+            color: #fff;
+        }
+
+        .notification.warning {
+            background: #ffa502;
+            color: #fff;
+        }
+
+        /* Rodapé */
+        .footer {
+            background: var(--main-bg);
+            border-top: 4px solid var(--border-color);
+            padding: 30px 0;
+            text-align: center;
+            margin-top: auto;
+        }
+
+        .footer-content {
+            max-width: 100%; /* Alterado para full width */
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .footer-text {
+            color: var(--text-color);
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+        }
+
+        .breaking-news-button {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            z-index: 1000;
+            background-color: var(--main-bg);
+            color: var(--accent-color);
+            border: 4px solid var(--border-color);
+            padding: 12px 20px;
+            font-family: var(--body-font);
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            box-shadow: 0 6px 0 var(--shadow-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .breaking-news-button:hover {
+            transform: translateY(3px);
+            box-shadow: 0 3px 0 var(--shadow-color);
+            background-color: var(--shadow-color);
+        }
+
+        /* Responsividade */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 20px;
+                text-align: center;
+            }
+
+            .logo-text h1 {
+                font-size: 2.5rem;
+            }
+
+            .newspaper-title {
+                font-size: 2.5rem;
+            }
+
+            .news-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .event-card {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .events-tabs {
+                flex-direction: column;
+                gap: 0;
+            }
+
+            .tab-button {
+                border-bottom: none;
+            }
+
+            .tab-button:last-child {
+                border-bottom: 3px solid var(--border-color);
+            }
+
+            .notice-board {
+                grid-template-columns: 1fr;
+            }
+
+            .gallery-grid {
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            }
+
+            .health-display {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .attacks-grid {
+                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            }
+
+            .districts-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo-text h1 {
+                font-size: 2rem;
+            }
+
+            .newspaper-title {
+                font-size: 2rem;
+            }
+
+            .section-title {
+                font-size: 2.2rem;
+            }
+
+            .event-icon {
+                width: 80px;
+                height: 80px;
+                font-size: 2.5rem;
+            }
+
+            .event-title {
+                font-size: 1.4rem;
+            }
+        }
+
+        @keyframes slideInFromBottom {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Estilos para botões de formatação */
+        .format-buttons {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        .format-button {
+            background: var(--main-bg);
+            color: var(--text-color);
+            border: 2px solid var(--border-color);
+            padding: 5px 10px;
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Menu de navegação -->
+    <div class="nav-container">
+        <div class="nav-menu">
+            <button class="nav-button">Navegar</button>
+            <div class="nav-dropdown">
+                <a href="homepage.html">Página Principal</a>
+                <a href="tabelas.html">Tabelas</a>
+                <a href="arena.html">Arena</a>
+                <a href="forja.html">Forja de Adornos</a>
+                <a href="Vorgram_itens.html">Itens</a>
+            </div>
+        </div>
+        <div class="color-menu">
+            <button class="color-button">Cores</button>
+            <div class="color-dropdown">
+                <button onclick="changeTheme('forest')">Floresta</button>
+                <button onclick="changeTheme('autumn')">Outono</button>
+                <button onclick="changeTheme('twilight')">Crepúsculo</button>
+                <button onclick="changeTheme('night')">Noite</button>
+                <button onclick="changeTheme('beige')">Bege</button>
+                <button onclick="changeTheme('oak')">Carvalho</button>
+                <button onclick="changeTheme('sand')">Areia</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Cabeçalho -->
+    <header class="header">
+        <div class="header-content">
+            <div class="logo-section">
+                <div class="logo-image">📰</div>
+                <div class="logo-text">
+                    <h1>Centro de Informações</h1>
+                    <div class="subtitle">Jornal & Arena de Eventos</div>
+                </div>
+            </div>
+            <nav class="header-nav">
+                <a href="#noticias" class="header-nav-item">Notícias</a>
+                <a href="#arena" class="header-nav-item">Arena de Eventos</a>
+                <a href="#important-notices" class="header-nav-item">Avisos Importantes</a>
+                <a href="#avisos" class="header-nav-item">Mural da Cidade</a>
+                <a href="#distritos" class="header-nav-item">Distritos</a>
+                <a href="#galeria" class="header-nav-item">Galeria</a>
+                <button id="copy-code" class="header-nav-item" onclick="copyPageCode()">Copiar Código</button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Conteúdo principal -->
+    <div class="container">
+        <!-- Seção do jornal -->
+        <section class="newspaper-section">
+            <h2 class="newspaper-title">📜 Notícias da Torre da Vela 📜</h2>
+            <p class="newspaper-subtitle">O jornal oficial que mantém nossa comunidade informada</p>
+            <div class="newspaper-date" id="current-date">Edição de Hoje</div>
+        </section>
+
+        <!-- Novo mural de avisos importantes -->
+        <section id="important-notices" class="notices-section important" role="region" aria-labelledby="important-notices-title">
+            <h3 class="section-title" id="important-notices-title">🚨 Mural de Avisos Importantes</h3>
+            <div id="add-important-notice-container" style="text-align: center; margin-bottom: 20px;">
+                <button class="admin-button" onclick="showImportantNoticeForm()">Adicionar Aviso Importante</button>
+            </div>
+            <div class="notice-board" id="important-notice-board"></div>
+        </section>
+
+        <!-- Notícias principais -->
+        <section id="noticias">
+            <h3 class="section-title">🗞️ Últimas Notícias</h3>
+            <div id="add-news-container" style="text-align: center; margin-bottom: 20px;">
+                <button class="admin-button" onclick="showNewsForm()">Adicionar Notícia</button>
+            </div>
+            <div class="news-grid" id="news-grid"></div>
+        </section>
+
+        <!-- Arena de eventos -->
+        <section id="arena" class="arena-section">
+            <h3 class="section-title">🏟️ Arena de Eventos</h3>
+            <div class="arena-image">⚔</div>
+            
+            <div class="events-tabs">
+                <button class="tab-button active" onclick="showTab('futuros', this)">Próximos Eventos</button>
+                <button class="tab-button" onclick="showTab('passados', this)">Eventos Passados</button>
+                <button class="tab-button" onclick="showTab('torneios', this)">Torneios</button>
+                <button class="tab-button" onclick="showTab('lutas', this)">Lutas contra Personagens</button>
+            </div>
+
+            <!-- Eventos futuros -->
+            <div id="futuros" class="tab-content active">
+                <div id="add-futuros-container" style="text-align: center; margin-bottom: 20px;">
+                    <div class="event-type-selector">
+                        <button class="event-type-button" onclick="showEventForm('futuros', 'standard')">Adicionar Evento Padrão</button>
+                        <button class="event-type-button" onclick="showEventForm('futuros', 'fight')">Adicionar Luta</button>
+                    </div>
+                </div>
+                <div class="event-list" id="futuros-list"></div>
+            </div>
+
+            <!-- Eventos passados -->
+            <div id="passados" class="tab-content">
+                <div id="add-passados-container" style="text-align: center; margin-bottom: 20px;">
+                    <div class="event-type-selector">
+                        <button class="event-type-button" onclick="showEventForm('passados', 'standard')">Adicionar Evento Padrão</button>
+                        <button class="event-type-button" onclick="showEventForm('passados', 'fight')">Adicionar Luta</button>
+                    </div>
+                </div>
+                <div class="event-list" id="passados-list"></div>
+            </div>
+
+            <!-- Torneios -->
+            <div id="torneios" class="tab-content">
+                <div id="add-torneios-container" style="text-align: center; margin-bottom: 20px;">
+                    <div class="event-type-selector">
+                        <button class="event-type-button" onclick="showEventForm('torneios', 'standard')">Adicionar Evento Padrão</button>
+                        <button class="event-type-button" onclick="showEventForm('torneios', 'fight')">Adicionar Luta</button>
+                    </div>
+                </div>
+                <div class="event-list" id="torneios-list"></div>
+            </div>
+
+            <!-- Lutas contra Personagens -->
+            <div id="lutas" class="tab-content">
+                <div id="add-lutas-container" style="text-align: center; margin-bottom: 20px;">
+                    <button class="event-type-button" onclick="showEventForm('lutas', 'fight')">Adicionar Nova Luta</button>
+                </div>
+                <div class="event-list" id="lutas-list"></div>
+            </div>
+        </section>
+
+        <!-- Nova seção de distritos com dropdowns -->
+        <section id="distritos" class="districts-section" role="region" aria-labelledby="districts-title">
+            <h3 class="section-title" id="districts-title">🏙️ Distritos da Cidade</h3>
+            <div class="districts-grid">
+                <article class="district-card">
+                    <h4 class="district-title" onclick="toggleDistrict(this)" aria-expanded="false" role="button" tabindex="0">Prefeitura – A Mente que Guia a Cidade <span class="expand-arrow">▶</span></h4>
+                    <div class="district-content">
+                        <p class="district-description">A Prefeitura é o distrito central, responsável por coordenar todo o funcionamento da cidade. É daqui que partem as decisões administrativas, as regras de convivência e as ordens que mantêm a harmonia entre os moradores e aventureiros. Além de ser o espaço político, é também o ponto de encontro entre diferentes povos, já que desempenha um papel diplomático fundamental.</p>
+                        <ul class="district-topics">
+                            <li>Informações dos aventureiros e moradores: funciona como um registro de informações de cada um dos aventureiros e seus moradores, contando com as informações da sua vida, classe, nível e inventário.</li>
+                            <li>Itens de inventário: supervisiona os bens conquistados nas jornadas, assegurando que tudo seja registrado corretamente.</li>
+                            <li>Diplomacia entre raças: é o canal de comunicação entre espécies, prevenindo conflitos e firmando alianças.</li>
+                            <li>Gestão dos distritos: garante que os demais setores – Casa da moeda, Mercadão, Produção e Armazém, Jornal – trabalhem em conjunto.</li>
+                        </ul>
+                    </div>
+                </article>
+
+                <article class="district-card">
+                    <h4 class="district-title" onclick="toggleDistrict(this)" aria-expanded="false" role="button" tabindex="0">Casa da Moeda – O Coração Financeiro <span class="expand-arrow">▶</span></h4>
+                    <div class="district-content">
+                        <p class="district-description">A Casa da Moeda é onde pulsa a riqueza da cidade. É o centro que mede o progresso coletivo e individual, controlando a moeda oficial e garantindo que os recursos circulem de forma equilibrada. Além de banco, é também um símbolo de estabilidade e confiança.</p>
+                        <ul class="district-topics">
+                            <li>Valor inteiro da cidade (PIB): mede o quanto a cidade produz em riquezas.</li>
+                            <li>Reservas individuais: controla quanto cada morador tem guardado, mostrando o nível de segurança econômica de cada cidadão.</li>
+                            <li>Espiga Coins: a moeda oficial, utilizada em compras, trocas e pagamentos, representando a base do comércio.</li>
+                            <li>Recompensa: a casa da moeda é quem faz a distribuição de moedas conquistadas por missões.</li>
+                        </ul>
+                    </div>
+                </article>
+
+                <article class="district-card">
+                    <h4 class="district-title" onclick="toggleDistrict(this)" aria-expanded="false" role="button" tabindex="0">Produção e Armazém – O Distrito da Forja e da Criação <span class="expand-arrow">▶</span></h4>
+                    <div class="district-content">
+                        <p class="district-description">Aqui está a força criativa e bélica da cidade. O distrito da Produção e Armazém é onde armas são forjadas, ataques são moldados e relíquias ganham vida. É também onde o poder de cada aventureiro se define, já que as Armas de Assinatura representam identidade, estratégia e estilo de combate.</p>
+                        <ul class="district-topics">
+                            <li>Arma de Assinatura: arma principal de cada aventureiro, equipada com 3 espaços para relíquias (K, J, Q) e 10 para ataques.</li>
+                            <li>Fusão de ataques: sistema que permite absorver ataques de armas novas e incorporá-los na assinatura.</li>
+                            <li>Registros oficiais: guarda histórico de armas e do dano causado pelos jogadores.</li>
+                            <li>Relíquias K, J e Q: cartas especiais que ativam efeitos automáticos, podendo mudar o rumo de batalhas.</li>
+                        </ul>
+                    </div>
+                </article>
+
+                <article class="district-card">
+                    <h4 class="district-title" onclick="toggleDistrict(this)" aria-expanded="false" role="button" tabindex="0">Mercadão – A Alma Comercial e Cultural <span class="expand-arrow">▶</span></h4>
+                    <div class="district-content">
+                        <p class="district-description">O Mercadão é o distrito mais movimentado da cidade, onde moradores e aventureiros se encontram para negociar, vender e trocar. Mais do que simples comércio.</p>
+                        <ul class="district-topics">
+                            <li>Preços dos itens: definidos em conjunto com a casa da moeda.</li>
+                            <li>Troca de itens: permite que aventureiros façam negociações diretas.</li>
+                            <li>Funcionalidade: além de valor, cada peça preserva a informação de como ela funciona.</li>
+                            <li>Leilão: No Mercadão pode ser feito um leilão pelos aventureiros de suas essências e itens.</li>
+                        </ul>
+                    </div>
+                </article>
+
+                <article class="district-card">
+                    <h4 class="district-title" onclick="toggleDistrict(this)" aria-expanded="false" role="button" tabindex="0">Quartel – A Força e a Proteção da Cidade <span class="expand-arrow">▶</span></h4>
+                    <div class="district-content">
+                        <p class="district-description">O Quartel é o distrito militar, onde a disciplina encontra a aventura. É daqui que partem as missões semanais, as estratégias de defesa e as explorações para além das muralhas. Também é o espaço de treinamento, onde classes de aventureiros são incentivadas a fortalecer suas habilidades.</p>
+                        <ul class="district-topics">
+                            <li>Missões semanais: objetivos renovados que mantêm a cidade ativa e os jogadores em movimento.</li>
+                            <li>Missões de classe: atividades específicas para cada grupo, explorando habilidades únicas.</li>
+                            <li>Explorações e pontos de interesse: revelação de novas áreas e locais misteriosos, ampliando os horizontes da cidade.</li>
+                        </ul>
+                    </div>
+                </article>
+
+                <article class="district-card">
+                    <h4 class="district-title" onclick="toggleDistrict(this)" aria-expanded="false" role="button" tabindex="0">Jornal – O Porta Voz da Informação <span class="expand-arrow">▶</span></h4>
+                    <div class="district-content">
+                        <p class="district-description">O Jornal é o distrito das informações, onde a divulgação é feita para os moradores da cidade. É daqui que partem as informações sobre cada um dos distritos e até mesmo suas funções públicas, responsabilidades e afazeres com o povo da cidade. Também é o espaço de compartilhamento e ingresso de entrada da chave da arena e os desafiantes de terras distintas das nossas, onde pode ser obtido uma premiação desses desafiantes que nos podem ajudar a fortalecer suas habilidades.</p>
+                        <ul class="district-topics">
+                            <li>Responsabilidades do Jornal:</li>
+                            <li>Comunicar a cidade: com as notícias e acontecimentos dentro de cada uma das obrigações e responsabilidades dos distritos.</li>
+                            <li>Anunciar eventos: desafiantes e competições na arena.</li>
+                            <li>Publicar avisos e notícias de interesse coletivo: como as notas dos alunos serão quantificadas.</li>
+                        </ul>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <!-- Mural da cidade (antigo avisos importantes, agora editável) -->
+        <section id="avisos" class="notices-section" role="region" aria-labelledby="city-mural-title">
+            <h3 class="section-title" id="city-mural-title">📋 Mural da Cidade</h3>
+            <div id="add-notice-container" style="text-align: center; margin-bottom: 20px;">
+                <button class="admin-button" onclick="showNoticeForm()">Adicionar Aviso</button>
+            </div>
+            <div class="notice-board" id="notice-board"></div>
+        </section>
+
+        <!-- Galeria de imagens -->
+        <section id="galeria" class="gallery-section">
+            <h3 class="section-title">🖼️ Galeria da Cidade</h3>
+            <div class="gallery-grid">
+                <div class="gallery-item" onclick="showGalleryModal('pergaminho')">
+                    <div class="gallery-image">📜</div>
+                    <p class="gallery-caption">Pergaminhos Históricos</p>
+                </div>
+
+                <div class="gallery-item" onclick="showGalleryModal('bandeiras')">
+                    <div class="gallery-image">🚩</div>
+                    <p class="gallery-caption">Bandeiras do Reino</p>
+                </div>
+
+                <div class="gallery-item" onclick="showGalleryModal('arena')">
+                    <div class="gallery-image">🏟️</div>
+                    <p class="gallery-caption">Arena em Ação</p>
+                </div>
+
+                <div class="gallery-item" onclick="showGalleryModal('publico')">
+                    <div class="gallery-image">👥</div>
+                    <p class="gallery-caption">Público nos Eventos</p>
+                </div>
+
+                <div class="gallery-item" onclick="showGalleryModal('duelos')">
+                    <div class="gallery-image">⚔️</div>
+                    <p class="gallery-caption">Duelos Épicos</p>
+                </div>
+
+                <div class="gallery-item" onclick="showGalleryModal('celebracao')">
+                    <div class="gallery-image">🎉</div>
+                    <p class="gallery-caption">Celebrações</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Rodapé -->
+    <footer class="footer">
+        <div class="footer-content">
+            <p class="footer-text">© 2025 Centro de Informações - Vale do Espantalho</p>
+        </div>
+    </footer>
+
+    <!-- Botão de notícia urgente -->
+    <button class="breaking-news-button" onclick="addBreakingNews()">Simular Notícia Urgente</button>
+
+    <script>
+        // ===== SISTEMA DE NOTIFICAÇÕES =====
+        function showNotification(message, type = 'info') {
+            const notification = document.createElement('div');
+            notification.className = `notification ${type}`;
+            notification.textContent = message;
+            document.body.appendChild(notification);
+
+            setTimeout(() => notification.classList.add('show'), 100);
+            setTimeout(() => {
+                notification.classList.remove('show');
+                setTimeout(() => {
+                    if (notification.parentNode) {
+                        notification.parentNode.removeChild(notification);
+                    }
+                }, 300);
+            }, 3000);
+        }
+
+        // ===== DADOS LOCAIS =====
+        let newsData = JSON.parse(localStorage.getItem('news')) || [];
+        let eventsData = JSON.parse(localStorage.getItem('events')) || {
+            futuros: [],
+            passados: [],
+            torneios: [],
+            lutas: []
+        };
+        let noticesData = JSON.parse(localStorage.getItem('notices')) || []; // Para Mural da Cidade
+        let importantNoticesData = JSON.parse(localStorage.getItem('importantNotices')) || []; // Para Avisos Importantes
+
+        // Cartas fixas para ataques
+        const cartas = ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K'];
+
+        // ===== SEED DATA IF EMPTY =====
+        function seedData() {
+            if (!newsData.length) {
+                newsData = [
+                    {
+                        category: 'Agricultura',
+                        title: 'Colheita Recorde de Trigo Dourado',
+                        date: '28 de Agosto de 2025',
+                        image: '🌾',
+                        content: 'Os campos do Vale do Espantalho produziram a maior colheita de trigo dourado dos últimos cinco anos! Nossos agricultores atribuem o sucesso às novas técnicas de cultivo mágico implementadas pelo Mestre Agricultor Bardan Verdecampo.'
+                    }
+                    // Adicionar outras notícias seed aqui se necessário...
+                ];
+                localStorage.setItem('news', JSON.stringify(newsData));
+            }
+
+if (!eventsData.lutas.length) {
+    eventsData.lutas = [
+        {
+            type: 'fight',
+            name: 'Bobo da Corte de Aracna',
+            maxHealth: 80,
+            currentHealth: 80,
+            image: '🤡',
+            description: 'Um bobo da corte que adora o caos e a destruição, sempre sorridente mesmo após perder seu reino. Usa truques caóticos para confundir e ferir seus inimigos.',
+            deadline: '15 de Setembro de 2025',
+            location: 'Ruínas do Castelo Caído',
+            stats: { forca: 12, defesa: 10, agilidade: 18, magia: 20 },
+            attacks: [
+                { carta: 'A', nome: 'Corte Simples', habilidade: 'Causa 3 de dano.' },
+                { carta: '2', nome: 'Corte Seco', habilidade: 'Causa 3 de dano em todos.' },
+                { carta: '3', nome: 'Magia de Confusão', habilidade: 'Dano aleatório (1–13).' },
+                { carta: '4', nome: 'Foice do Demônio', habilidade: 'Aplica Sangramento (2 de dano por 2 rodadas).' },
+                { carta: '5', nome: 'Mãos Tolas', habilidade: 'Rouba 1 turno de um jogador.' },
+                { carta: '6', nome: 'Carta Explosiva', habilidade: '5 de dano a um jogador aleatório.' },
+                { carta: '7', nome: 'Ilusão', habilidade: '50% de chance de anular o próximo ataque (2 turnos).' },
+                { carta: '8', nome: 'Correntes Caóticas', habilidade: 'Prende e causa confusão ao jogador.' },
+                { carta: '9', nome: 'Baralho Giratório', habilidade: 'Todos recebem 1–4 de dano aleatório.' },
+                { carta: '10', nome: 'Riso Insano', habilidade: 'Cura 5 de vida e causa confusão a alguém.' },
+                { carta: 'J', nome: 'Truque de Mágico', habilidade: 'Inverte o próximo ataque contra o boss.' },
+                { carta: 'Q', nome: 'Dança da Loucura', habilidade: 'Todos os jogadores causam -2 de dano.' },
+                { carta: 'K', nome: 'Bombas Caóticas', habilidade: 'Invoca bomba (4 de vida) que explode causando 6 de dano.' }
+            ],
+            weaknesses: ['Ordens Divinas', 'Magia de Luz'],
+            rewards: [
+                { nome: 'Pequena Bomba Caótica', imagem: '💣', descricao: 'Versão pequena da bomba caótica.', habilidade: 'Protege com 3 de vida e explode causando 4 de dano.' }
+            ]
+        },
+        {
+    type: 'fight',
+    name: 'Cavaleiro das Sombras',
+    maxHealth: 150,
+    currentHealth: 150,
+    image: '🗡️',
+    description: 'Um cavaleiro que possui uma armadura escura, como se foi forjada pela própria escuridão, apareceu de repente na arena tentando atacar qualquer um em seu caminho.',
+    difficulty: 'difícil',
+    location: 'Arena das Sombras',
+    stats: { forca: 20, defesa: 16, agilidade: 12, magia: 8 },
+    attacks: [
+        { carta: 'A', nome: 'Corte sombrio', habilidade: '5 de dano a dois aventureiros' },
+        { carta: '2', nome: 'Rugido vibrante', habilidade: 'Aumenta seu dano total por 2 e diminui o dano de todos os aventureiros por 2 na próxima rodada(dano indívidual).' },
+        { carta: '3', nome: 'Rajada de cortes', habilidade: '5 de dano em todos os aventureiros.' },
+        { carta: '4', nome: 'Corte sombrio', habilidade: '7 de dano a um aventureiro.' },
+        { carta: '5', nome: 'Olhar sombrio', habilidade: 'Causa medo: -10 de vida por 2 turnos (se vida <= 10, morre).' },
+        { carta: '6', nome: 'Tentativa de chantagem', habilidade: '50%: aventureiro enfurecido (-4 vida + marca de caçada); 50%: cavaleiro sofre 6 de dano.' },
+        { carta: '7', nome: 'Risada Insana', habilidade: 'Recupera 10 de vida e pede sequência de 7 números.' },
+        { carta: '8', nome: 'Corte explosivo', habilidade: '7 de dano a 1 aventureiro e 3 de dano aos outros.' },
+        { carta: '9', nome: 'Rajada de cortes', habilidade: '5 de dano em todos os aventureiros.' },
+        { carta: '10', nome: 'Destreza eletrizante', habilidade: 'Causa 6 de dano a um aventureiro e compra mais uma carta.' },
+        { carta: 'J', nome: 'Luz Negra', habilidade: 'Reduz o dano recebido em 4 por 3 turnos.' },
+        { carta: 'Q', nome: 'Invocação dos cortes', habilidade: 'Causa 5 de dano por 3 turnos a um aventureiro.' },
+        { carta: 'K', nome: 'Explosão de fúria', habilidade: 'Marca de caça em todos; aventureiros devem segurar a respiração por 2 turnos (se falharem, boss recupera 15 de vida) + sequência de 7 números.' }
+    ],
+    specialMechanics: ['Marca de caça: ativada no Às(1) e 10, dura 2 turnos, redireciona ataques para o marcado.'],
+    onDeath: 'Se aventureiros errarem sequência de 7 números, volta com 25 de vida (sem repetir ação).',
+    rewards: [
+        { nome: 'Luz negra', imagem: '🌑', descricao: 'Reduz dano recebido em 4 por 2 turnos (carta J).', quantidade: 1 },
+        { nome: 'Peça de armadura sombria', imagem: '🛡️', descricao: 'Concede +4 de vida.', quantidade: 2 },
+        { nome: 'Fragmento de Lâmina Sombria', imagem: '🔮', descricao: 'Ativado nos números 1, 7 e 10. Causa 8 de dano. No 7: próximo ataque de um aliado acerta todos.', quantidade: 1 }
+    ]
+}
+    ];
+    localStorage.setItem('events', JSON.stringify(eventsData));
+}
+
+
+            if (!noticesData.length) {
+                noticesData = [
+                    {
+                        priority: 'INFORMAÇÃO',
+                        title: 'Notas da Sala',
+                        content: 'Como irão funcionar?\n\nAs notas serão obtidas pelos níveis de classe, missões concluídas e pela avaliação bimestral, que será o confronto entre o discipulado e o lado da vela.\n\nComeçando pelos níveis de classe está estipulado:\n<strong>Por nível da classe: 0.25;</strong>\nQuando se chega em nível 3 em todas as classes se obtém: <strong>1.0 na média;</strong>\nQuando se chega em nível 5 em todas as classes se obtém: <strong>1.0 na média.</strong>\n\nMissões semanais concluídas:\nVariam entre: <em>0.20 e 0.50.</em>\n\nAvaliação bimestral:\nConfronto entre o discipulado e o lado da vela: A nota é uma incógnita.',
+                        date: '08 de Setembro de 2025'
+                    },
+                    {
+                        priority: 'URGENTE',
+                        title: 'Envio de Registros',
+                        content: '<h5>Urgente!!!!</h5>\nFaçam o envio dos registros do educação profissional desta semana atual na semana anterior.',
+                        date: '08 de Setembro de 2025'
+                    }
+                ];
+                localStorage.setItem('notices', JSON.stringify(noticesData));
+            }
+        }
+
+        // ===== CARREGAR NOTÍCIAS =====
+        function loadNews() {
+            const grid = document.getElementById('news-grid');
+            grid.innerHTML = '';
+            newsData.forEach((data, index) => {
+                const article = document.createElement('article');
+                article.className = 'news-article';
+                article.innerHTML = `
+                    <span class="news-category">${data.category}</span>
+                    <h4 class="news-title">${data.title}</h4>
+                    <p class="news-date">${data.date}</p>
+                    <div class="news-image">${isUrl(data.image) ? `<img src="${data.image}" alt="Imagem da notícia" style="max-width:100%; max-height:100%; object-fit: contain;">` : data.image}</div>
+                    <p class="news-content">${parseContent(data.content)}</p>
+                `;
+                const buttons = document.createElement('div');
+                buttons.className = 'admin-buttons';
+                const editBtn = document.createElement('button');
+                editBtn.className = 'admin-button';
+                editBtn.textContent = 'Editar';
+                editBtn.onclick = () => showNewsForm(index, data);
+                const delBtn = document.createElement('button');
+                delBtn.className = 'admin-button';
+                delBtn.textContent = 'Deletar';
+                delBtn.onclick = () => {
+                    if (confirm('Tem certeza que deseja deletar esta notícia?')) {
+                        newsData.splice(index, 1);
+                        localStorage.setItem('news', JSON.stringify(newsData));
+                        loadNews();
+                        showNotification('Notícia deletada com sucesso', 'success');
+                    }
+                };
+                buttons.appendChild(editBtn);
+                buttons.appendChild(delBtn);
+                article.appendChild(buttons);
+                grid.appendChild(article);
+            });
+        }
+
+        // Função para parsear conteúdo simples (HTML básico e \n para <br>)
+        function parseContent(content) {
+            // Permitir tags HTML simples como <strong>, <em>, <h5>, <span style="font-size:...">
+            // Converter \n para <br>
+            return content.replace(/\n/g, '<br>');
+        }
+
+        // Função para inserir tag no textarea
+        function insertTag(textareaId, openTag, closeTag) {
+            const textarea = document.getElementById(textareaId);
+            const start = textarea.selectionStart;
+            const end = textarea.selectionEnd;
+            const text = textarea.value;
+            const before = text.substring(0, start);
+            const selected = text.substring(start, end);
+            const after = text.substring(end);
+            textarea.value = before + openTag + selected + closeTag + after;
+            textarea.focus();
+            textarea.selectionStart = start + openTag.length;
+            textarea.selectionEnd = start + openTag.length + selected.length;
+        }
+
+        // ===== FORMULÁRIO DE NOTÍCIA =====
+        window.showNewsForm = function(index = null, data = {}) {
+            const modal = document.createElement('div');
+            modal.className = 'modal';
+            const contentId = 'news-content';
+            modal.innerHTML = `
+                <div class="modal-content">
+                    <button class="modal-close" onclick="closeModal()">&times;</button>
+                    <h3 class="modal-header">${index !== null ? 'Editar' : 'Adicionar'} Notícia</h3>
+                    <form id="news-form">
+                        <input type="text" id="news-category" placeholder="Categoria" value="${data.category || ''}" required>
+                        <input type="text" id="news-title" placeholder="Título" value="${data.title || ''}" required>
+                        <input type="text" id="news-date" placeholder="Data" value="${data.date || ''}" required>
+                        <input type="text" id="news-image" placeholder="Imagem (URL ou emoji)" value="${data.image || ''}" required>
+                        <div class="format-buttons">
+                            <button type="button" class="format-button" onclick="insertTag('${contentId}', '<strong>', '</strong>')">Negrito</button>
+                            <button type="button" class="format-button" onclick="insertTag('${contentId}', '<em>', '</em>')">Itálico</button>
+                            <button type="button" class="format-button" onclick="insertTag('${contentId}', '<span style=\\"font-size:1.5em;\\">', '</span>')">Aumentar Tamanho</button>
+                            <button type="button" class="format-button" onclick="insertTag('${contentId}', '<h5>', '</h5>')">Subtítulo</button>
+                        </div>
+                        <textarea id="${contentId}" placeholder="Conteúdo (use os botões para formatar ou insira tags manualmente)" rows="6" required>${data.content || ''}</textarea>
+                        <button type="submit">Salvar</button>
+                    </form>
+                </div>
+            `;
+            document.body.appendChild(modal);
+            setTimeout(() => modal.classList.add('show'), 10);
+
+            document.getElementById('news-form').addEventListener('submit', (e) => {
+                e.preventDefault();
+                const newData = {
+                    category: document.getElementById('news-category').value,
+                    title: document.getElementById('news-title').value,
+                    date: document.getElementById('news-date').value,
+                    image: document.getElementById('news-image').value,
+                    content: document.getElementById(contentId).value
+                };
+                
+                if (index !== null) {
+                    newsData[index] = newData;
+                    showNotification('Notícia atualizada com sucesso!', 'success');
+                } else {
+                    newsData.push(newData);
+                    showNotification('Notícia adicionada com sucesso!', 'success');
+                }
+                localStorage.setItem('news', JSON.stringify(newsData));
+                loadNews();
+                closeModal();
+            });
+
+            modal.addEventListener('click', (e) => { 
+                if (e.target === modal) closeModal(); 
+            });
+        };
+
+        // ===== CARREGAR EVENTOS =====
+        function loadEvents(tab) {
+            const list = document.getElementById(tab + '-list');
+            list.innerHTML = '';
+            eventsData[tab].forEach((data, index) => {
+                const card = document.createElement('div');
+                
+                if (data.type === 'fight') {
+                    card.className = 'event-card fight-card';
+                    const healthPercentage = Math.min(100, (data.currentHealth / data.maxHealth) * 100 || 0);
+                    const pixelatedClass = (data.originalWidth && data.originalWidth < 64) || (data.originalHeight && data.originalHeight < 64) ? ' pixelated' : '';
+                    let detailsHTML = `
+                        <div class="event-icon${pixelatedClass}">${isUrl(data.image) ? `<img src="${data.image}" alt="Imagem do desafiante" style="width:100%; height:100%; object-fit: contain;">` : data.image}</div>
+                        <div class="event-details">
+                            <h4 class="event-title">⚔️ ${data.name}</h4>
+                            <p class="event-date-location">${data.location}</p>
+                            <div class="health-bar-container">
+                                <div class="health-label">Vida do Desafiante</div>
+                                <div class="health-display">
+                                    <div class="health-bar">
+                                        <div class="health-fill" style="width: ${healthPercentage}%"></div>
+                                        <div class="health-text">${data.currentHealth} / ${data.maxHealth}</div>
+                                    </div>
+                                    <div class="health-controls">
+                                        <button class="health-button decrease" onclick="updateHealth('${tab}', ${index}, -5)">-5</button>
+                                        <button class="health-button decrease" onclick="updateHealth('${tab}', ${index}, -1)">-1</button>
+                                        <button class="health-button increase" onclick="updateHealth('${tab}', ${index}, 1)">+1</button>
+                                        <button class="health-button increase" onclick="updateHealth('${tab}', ${index}, 5)">+5</button>
+                                        <button class="health-button max" onclick="updateHealthToMax('${tab}', ${index})">Max</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <p class="event-description">${parseContent(data.description)}</p>
+                            <div class="deadline-info">
+                                <div class="deadline-label">Prazo para Desafio:</div>
+                                <div class="deadline-text">${data.deadline}</div>
+                            </div>
+                    `;
+
+                    // Detalhes do Oponente (Estatísticas e Fraquezas)
+                    if (data.stats || data.weaknesses) {
+                        detailsHTML += `
+                            <div class="opponent-section">
+                                <h5 class="opponent-section-title">Detalhes do Oponente</h5>
+                                ${data.stats ? `
+                                    <p><strong>Estatísticas:</strong> Força: ${data.stats.forca || 0}, Defesa: ${data.stats.defesa || 0}, Agilidade: ${data.stats.agilidade || 0}, Magia: ${data.stats.magia || 0}</p>
+                                ` : ''}
+                                ${data.weaknesses && data.weaknesses.length ? `
+                                    <p><strong>Fraquezas:</strong> ${data.weaknesses.join(', ')}</p>
+                                ` : ''}
+                            </div>
+                        `;
+                    }
+
+                    // Seção expansível para Ataques
+                    if (data.attacks && data.attacks.length) {
+                        detailsHTML += `
+                            <div class="expandable-header" onclick="toggleExpandable(this)" aria-expanded="false" aria-controls="attacks-${tab}-${index}" role="button" tabindex="0" aria-label="Expandir/Contrair Ataques por Carta">
+                                <h5 class="opponent-section-title">Ataques por Carta</h5>
+                                <span class="expand-arrow">▶</span>
+                            </div>
+                            <div class="expandable-content" id="attacks-${tab}-${index}">
+                                <div class="attacks-grid">
+                                    ${data.attacks.map((atk, atkIndex) => `
+                                        <div class="attack-item">
+                                            <h6>${atk.carta}: ${atk.nome || 'Não definido'}</h6>
+                                            <button class="toggle-button" aria-expanded="false" aria-controls="attack-${tab}-${index}-${atkIndex}" aria-label="Mostrar/Ocultar habilidade do ataque ${atk.carta}" onclick="toggleAttack(this, 'attack-${tab}-${index}-${atkIndex}')">👁️</button>
+                                            <div id="attack-${tab}-${index}-${atkIndex}" class="hidden-content" hidden>${atk.habilidade || 'Sem habilidade definida.'}</div>
+                                        </div>
+                                    `).join('')}
+                                </div>
+                            </div>
+                        `;
+                    }
+
+                    // Seção expansível para Recompensas
+                    if (data.rewards && data.rewards.length) {
+                        detailsHTML += `
+                            <div class="expandable-header" onclick="toggleExpandable(this)" aria-expanded="false" aria-controls="rewards-${tab}-${index}" role="button" tabindex="0" aria-label="Expandir/Contrair Recompensas">
+                                <h5 class="opponent-section-title">Recompensas</h5>
+                                <span class="expand-arrow">▶</span>
+                            </div>
+                            <div class="expandable-content" id="rewards-${tab}-${index}">
+                                ${data.rewards.map(r => `
+                                    <div class="reward-item">
+                                        <div class="reward-image">${isUrl(r.imagem) ? `<img src="${r.imagem}" alt="Imagem da recompensa ${r.nome}">` : r.imagem}</div>
+                                        <div class="reward-details">
+                                            <strong>${r.nome}</strong><br>
+                                            ${r.descricao}<br>
+                                            Habilidade: ${r.habilidade}
+                                        </div>
+                                    </div>
+                                `).join('')}
+                            </div>
+                        `;
+                    }
+
+                    detailsHTML += `</div>`;
+                    card.innerHTML = detailsHTML;
+                } else {
+                    card.className = 'event-card';
+                    card.innerHTML = `
+                        <div class="event-icon">${isUrl(data.icon) ? `<img src="${data.icon}" alt="Ícone do evento" style="max-width:100%; max-height:100%; object-fit: contain;">` : data.icon}</div>
+                        <div class="event-details">
+                            <h4 class="event-title">${data.title}</h4>
+                            <p class="event-date-location">${data.date_location}</p>
+                            <p class="event-description">${parseContent(data.description)}</p>
+                        </div>
+                    `;
+                }
+
+                const buttons = document.createElement('div');
+                buttons.className = 'admin-buttons';
+                const editBtn = document.createElement('button');
+                editBtn.className = 'admin-button';
+                editBtn.textContent = 'Editar';
+                editBtn.onclick = () => showEventForm(tab, data.type || 'standard', index, data);
+                const delBtn = document.createElement('button');
+                delBtn.className = 'admin-button';
+                delBtn.textContent = 'Deletar';
+                delBtn.onclick = () => {
+                    if (confirm('Tem certeza que deseja deletar este evento?')) {
+                        eventsData[tab].splice(index, 1);
+                        localStorage.setItem('events', JSON.stringify(eventsData));
+                        loadEvents(tab);
+                        showNotification('Evento deletado com sucesso', 'success');
+                    }
+                };
+                buttons.appendChild(editBtn);
+                buttons.appendChild(delBtn);
+                card.appendChild(buttons);
+                list.appendChild(card);
+            });
+        }
+
+        // Função para toggle de seções expansíveis
+        window.toggleExpandable = function(header) {
+            const expanded = header.getAttribute('aria-expanded') === 'true';
+            const contentId = header.getAttribute('aria-controls');
+            const content = document.getElementById(contentId);
+            const arrow = header.querySelector('.expand-arrow');
+
+            header.setAttribute('aria-expanded', !expanded);
+            if (expanded) {
+                content.style.display = 'none';
+                arrow.classList.remove('expanded');
+            } else {
+                content.style.display = 'block';
+                arrow.classList.add('expanded');
+            }
+        };
+
+        // ===== ATUALIZAR VIDA DOS PERSONAGENS =====
+        window.updateHealth = function(tab, index, change) {
+            const data = eventsData[tab][index];
+            const newHealth = Math.max(0, Math.min(data.maxHealth, data.currentHealth + change));
+            eventsData[tab][index].currentHealth = newHealth;
+            localStorage.setItem('events', JSON.stringify(eventsData));
+            loadEvents(tab);
+            const action = change > 0 ? 'aumentada' : 'diminuída';
+            showNotification(`Vida ${action}: ${newHealth}/${data.maxHealth}`, 'success');
+        };
+
+        window.updateHealthToMax = function(tab, index) {
+            const data = eventsData[tab][index];
+            eventsData[tab][index].currentHealth = data.maxHealth;
+            localStorage.setItem('events', JSON.stringify(eventsData));
+            loadEvents(tab);
+            showNotification(`Vida restaurada ao máximo: ${data.maxHealth}/${data.maxHealth}`, 'success');
+        };
+
+        // Função para toggle de ataques
+        window.toggleAttack = function(button, contentId) {
+            const content = document.getElementById(contentId);
+            const expanded = button.getAttribute('aria-expanded') === 'true';
+            button.setAttribute('aria-expanded', !expanded);
+            button.textContent = !expanded ? '👁️‍🗨️' : '👁️';
+            button.setAttribute('aria-label', `${!expanded ? 'Ocultar' : 'Mostrar'} habilidade do ataque`);
+            if (expanded) {
+                content.setAttribute('hidden', '');
+                content.classList.add('hidden-content');
+            } else {
+                content.removeAttribute('hidden');
+                content.classList.remove('hidden-content');
+            }
+        };
+
+        // ===== FORMULÁRIO DE EVENTO =====
+        window.showEventForm = function(tab, type = 'standard', index = null, data = {}) {
+            const modal = document.createElement('div');
+            modal.className = 'modal';
+            
+            let formContent = '';
+            
+            if (type === 'fight') {
+                const descId = 'event-description';
+                formContent = `
+                    <div class="modal-content">
+                        <button class="modal-close" onclick="closeModal()">&times;</button>
+                        <h3 class="modal-header">${index !== null ? 'Editar' : 'Adicionar'} Luta contra Personagem</h3>
+                        <form id="event-form">
+                            <input type="text" id="event-name" placeholder="Nome do Desafiante" value="${data.name || ''}" required>
+                            <input type="text" id="event-location" placeholder="Local da Luta" value="${data.location || ''}" required>
+                            <div class="health-input-container">
+                                <input type="number" id="event-max-health" class="health-input" placeholder="Vida Máxima" value="${data.maxHealth || 100}" min="1" required>
+                                <span>Vida atual será definida igual à máxima</span>
+                            </div>
+                            <div class="image-input-container">
+                                <label>Imagem do Desafiante:</label>
+                                <input type="text" id="event-image-url" placeholder="URL da imagem ou emoji" value="${data.image || ''}">
+                                <input type="file" id="event-image-file" accept="image/*" style="margin-top: 10px;">
+                                <div style="display: flex; gap: 10px;">
+                                    <input type="number" id="event-original-width" placeholder="Largura original (px)" value="${data.originalWidth || ''}" min="1">
+                                    <input type="number" id="event-original-height" placeholder="Altura original (px)" value="${data.originalHeight || ''}" min="1">
+                                </div>
+                                <div class="image-preview" id="image-preview">${data.image && !isUrl(data.image) ? data.image : '🎭'}</div>
+                            </div>
+                            <div class="format-buttons">
+                                <button type="button" class="format-button" onclick="insertTag('${descId}', '<strong>', '</strong>')">Negrito</button>
+                                <button type="button" class="format-button" onclick="insertTag('${descId}', '<em>', '</em>')">Itálico</button>
+                                <button type="button" class="format-button" onclick="insertTag('${descId}', '<span style=\\"font-size:1.5em;\\">', '</span>')">Aumentar Tamanho</button>
+                                <button type="button" class="format-button" onclick="insertTag('${descId}', '<h5>', '</h5>')">Subtítulo</button>
+                            </div>
+                            <textarea id="${descId}" placeholder="Descrição do Desafiante (use os botões para formatar ou insira tags manualmente)" rows="4" required>${data.description || ''}</textarea>
+                            <input type="text" id="event-deadline" placeholder="Prazo para Desafio (ex: 15 de Setembro de 2025)" value="${data.deadline || ''}" required>
+                            
+                            <div class="opponent-section">
+                                <h5 class="opponent-section-title">Estatísticas e Fraquezas</h5>
+                                <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px;">
+                                    <input type="number" id="event-stats-forca" placeholder="Força" value="${data.stats?.forca || ''}" min="0">
+                                    <input type="number" id="event-stats-defesa" placeholder="Defesa" value="${data.stats?.defesa || ''}" min="0">
+                                    <input type="number" id="event-stats-agilidade" placeholder="Agilidade" value="${data.stats?.agilidade || ''}" min="0">
+                                    <input type="number" id="event-stats-magia" placeholder="Magia" value="${data.stats?.magia || ''}" min="0">
+                                </div>
+                                <textarea id="event-weaknesses" placeholder="Fraquezas (separadas por vírgula)" rows="2">${data.weaknesses ? data.weaknesses.join(', ') : ''}</textarea>
+                            </div>
+                            
+                            <div class="opponent-section">
+                                <h5 class="opponent-section-title">Ataques por Carta</h5>
+                                ${cartas.map(c => {
+                                    const attack = data.attacks ? data.attacks.find(a => a.carta === c) : {};
+                                    return `
+                                        <div>
+                                            <label for="attack-nome-${c}">${c} - Nome:</label>
+                                            <input type="text" id="attack-nome-${c}" value="${attack.nome || ''}">
+                                            <label for="attack-habilidade-${c}">${c} - Habilidade:</label>
+                                            <textarea id="attack-habilidade-${c}" rows="2">${attack.habilidade || ''}</textarea>
+                                        </div>
+                                    `;
+                                }).join('')}
+                            </div>
+                            
+                            <div id="rewards-section">
+                                <h5 class="opponent-section-title">Recompensas</h5>
+                                <button type="button" onclick="addRewardFormItem()">Adicionar Recompensa</button>
+                                <div id="rewards-container"></div>
+                            </div>
+                            
+                            <button type="submit">Salvar</button>
+                        </form>
+                    </div>
+                `;
+            } else {
+                const descId = 'event-description';
+                formContent = `
+                    <div class="modal-content">
+                        <button class="modal-close" onclick="closeModal()">&times;</button>
+                        <h3 class="modal-header">${index !== null ? 'Editar' : 'Adicionar'} Evento Padrão</h3>
+                        <form id="event-form">
+                            <input type="text" id="event-title" placeholder="Título" value="${data.title || ''}" required>
+                            <input type="text" id="event-date-location" placeholder="Data e Local" value="${data.date_location || ''}" required>
+                            <div class="format-buttons">
+                                <button type="button" class="format-button" onclick="insertTag('${descId}', '<strong>', '</strong>')">Negrito</button>
+                                <button type="button" class="format-button" onclick="insertTag('${descId}', '<em>', '</em>')">Itálico</button>
+                                <button type="button" class="format-button" onclick="insertTag('${descId}', '<span style=\\"font-size:1.5em;\\">', '</span>')">Aumentar Tamanho</button>
+                                <button type="button" class="format-button" onclick="insertTag('${descId}', '<h5>', '</h5>')">Subtítulo</button>
+                            </div>
+                            <textarea id="${descId}" placeholder="Descrição (use os botões para formatar ou insira tags manualmente)" rows="4" required>${data.description || ''}</textarea>
+                            <input type="text" id="event-icon" placeholder="Ícone (URL ou emoji)" value="${data.icon || ''}" required>
+                            <button type="submit">Salvar</button>
+                        </form>
+                    </div>
+                `;
+            }
+            
+            modal.innerHTML = formContent;
+            document.body.appendChild(modal);
+            setTimeout(() => modal.classList.add('show'), 10);
+
+            // Preencher rewards existentes
+            if (type === 'fight') {
+                const rewardsContainer = document.getElementById('rewards-container');
+                if (data.rewards) {
+                    data.rewards.forEach((r, rIndex) => addRewardFormItem(r, rIndex));
+                }
+
+                // Configurar preview de imagem
+                const imageUrlInput = document.getElementById('event-image-url');
+                const imageFileInput = document.getElementById('event-image-file');
+                const preview = document.getElementById('image-preview');
+                
+                imageUrlInput.addEventListener('input', (e) => {
+                    const value = e.target.value;
+                    if (isUrl(value)) {
+                        preview.innerHTML = `<img src="${value}" alt="Preview" style="width:100%; height:100%; object-fit: contain;">`;
+                    } else if (value) {
+                        preview.textContent = value;
+                    } else {
+                        preview.textContent = '🎭';
+                    }
+                });
+                
+                imageFileInput.addEventListener('change', (e) => {
+                    const file = e.target.files[0];
+                    if (file) {
+                        const reader = new FileReader();
+                        reader.onload = (e) => {
+                            const dataUrl = e.target.result;
+                            preview.innerHTML = `<img src="${dataUrl}" alt="Preview" style="width:100%; height:100%; object-fit: contain;">`;
+                            imageUrlInput.value = dataUrl;
+                        };
+                        reader.readAsDataURL(file);
+                    }
+                });
+            }
+
+            document.getElementById('event-form').addEventListener('submit', (e) => {
+                e.preventDefault();
+                let newData;
+                
+                if (type === 'fight') {
+                    const maxHealth = parseInt(document.getElementById('event-max-health').value);
+                    const name = document.getElementById('event-name').value;
+                    const location = document.getElementById('event-location').value;
+                    const image = document.getElementById('event-image-url').value || '🎭';
+                    const description = document.getElementById('event-description').value;
+                    const deadline = document.getElementById('event-deadline').value;
+                    const originalWidth = parseInt(document.getElementById('event-original-width').value) || null;
+                    const originalHeight = parseInt(document.getElementById('event-original-height').value) || null;
+                    
+                    // Coletar estatísticas
+                    const stats = {
+                        forca: parseInt(document.getElementById('event-stats-forca').value) || 0,
+                        defesa: parseInt(document.getElementById('event-stats-defesa').value) || 0,
+                        agilidade: parseInt(document.getElementById('event-stats-agilidade').value) || 0,
+                        magia: parseInt(document.getElementById('event-stats-magia').value) || 0
+                    };
+                    
+                    // Coletar fraquezas
+                    const weaknessesText = document.getElementById('event-weaknesses').value;
+                    const weaknesses = weaknessesText ? weaknessesText.split(',').map(w => w.trim()).filter(w => w) : [];
+                    
+                    // Coleta attacks
+                    const attacks = cartas.map(c => ({
+                        carta: c,
+                        nome: document.getElementById(`attack-nome-${c}`).value.trim(),
+                        habilidade: document.getElementById(`attack-habilidade-${c}`).value.trim()
+                    }));
+                    
+                    // Coleta rewards
+                    const rewards = [];
+                    document.querySelectorAll('.reward-form-item').forEach(item => {
+                        const nome = item.querySelector('.reward-nome').value.trim();
+                        const imagem = item.querySelector('.reward-imagem-url').value.trim();
+                        const descricao = item.querySelector('.reward-descricao').value.trim();
+                        const habilidade = item.querySelector('.reward-habilidade').value.trim();
+                        if (nome || imagem || descricao || habilidade) {
+                            rewards.push({ nome, imagem, descricao, habilidade });
+                        }
+                    });
+                    
+                    // Validação dos campos obrigatórios
+                    if (!name || !location || !maxHealth || !description || !deadline) {
+                        showNotification('Por favor, preencha todos os campos obrigatórios', 'error');
+                        return;
+                    }
+                    
+                    if (maxHealth < 1 || isNaN(maxHealth)) {
+                        showNotification('A vida máxima deve ser um número maior que 0', 'error');
+                        return;
+                    }
+                    
+                    newData = {
+                        type: 'fight',
+                        name: name,
+                        location: location,
+                        maxHealth: maxHealth,
+                        currentHealth: index !== null ? Math.min(data.currentHealth, maxHealth) : maxHealth,
+                        image: image,
+                        description: description,
+                        deadline: deadline,
+                        originalWidth: originalWidth,
+                        originalHeight: originalHeight,
+                        stats: stats,
+                        weaknesses: weaknesses,
+                        attacks: attacks,
+                        rewards: rewards
+                    };
+                } else {
+                    const title = document.getElementById('event-title').value;
+                    const date_location = document.getElementById('event-date-location').value;
+                    const description = document.getElementById('event-description').value;
+                    const icon = document.getElementById('event-icon').value;
+                    
+                    // Validação dos campos obrigatórios
+                    if (!title || !date_location || !description || !icon) {
+                        showNotification('Por favor, preencha todos os campos obrigatórios', 'error');
+                        return;
+                    }
+                    
+                    newData = {
+                        type: 'standard',
+                        title: title,
+                        date_location: date_location,
+                        description: description,
+                        icon: icon
+                    };
+                }
+                
+                // Salvar nos dados locais
+                if (index !== null) {
+                    eventsData[tab][index] = newData;
+                    showNotification('Evento atualizado com sucesso!', 'success');
+                } else {
+                    eventsData[tab].push(newData);
+                    showNotification('Evento adicionado com sucesso!', 'success');
+                }
+                localStorage.setItem('events', JSON.stringify(eventsData));
+                loadEvents(tab);
+                closeModal();
+            });
+
+            modal.addEventListener('click', (e) => { 
+                if (e.target === modal) closeModal(); 
+            });
+        };
+
+        // Função para adicionar item de recompensa no form
+        window.addRewardFormItem = function(reward = {}, index = Date.now()) {
+            const container = document.getElementById('rewards-container');
+            const item = document.createElement('div');
+            item.className = 'reward-form-item';
+            item.innerHTML = `
+                <label for="reward-nome-${index}">Nome:</label>
+                <input type="text" class="reward-nome" id="reward-nome-${index}" value="${reward.nome || ''}">
+                <label for="reward-imagem-url-${index}">Imagem (URL ou emoji):</label>
+                <input type="text" class="reward-imagem-url" id="reward-imagem-url-${index}" value="${reward.imagem || ''}">
+                <input type="file" class="reward-imagem-file" id="reward-imagem-file-${index}" accept="image/*">
+                <div class="image-preview" id="reward-preview-${index}">${reward.imagem && !isUrl(reward.imagem) ? reward.imagem : '🏆'}</div>
+                <label for="reward-descricao-${index}">Descrição:</label>
+                <textarea class="reward-descricao" id="reward-descricao-${index}" rows="2">${reward.descricao || ''}</textarea>
+                <label for="reward-habilidade-${index}">Habilidade:</label>
+                <textarea class="reward-habilidade" id="reward-habilidade-${index}" rows="2">${reward.habilidade || ''}</textarea>
+                <button type="button" class="remove-reward" onclick="this.parentNode.remove()">Remover</button>
+            `;
+            container.appendChild(item);
+
+            // Preview imagem para recompensa
+            const urlInput = item.querySelector(`#reward-imagem-url-${index}`);
+            const fileInput = item.querySelector(`#reward-imagem-file-${index}`);
+            const preview = item.querySelector(`#reward-preview-${index}`);
+
+            urlInput.addEventListener('input', (e) => {
+                const value = e.target.value;
+                if (isUrl(value)) {
+                    preview.innerHTML = `<img src="${value}" alt="Preview da recompensa">`;
+                } else if (value) {
+                    preview.textContent = value;
+                } else {
+                    preview.textContent = '🏆';
+                }
+            });
+
+            fileInput.addEventListener('change', (e) => {
+                const file = e.target.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = (ev) => {
+                        const dataUrl = ev.target.result;
+                        preview.innerHTML = `<img src="${dataUrl}" alt="Preview da recompensa">`;
+                        urlInput.value = dataUrl;
+                    };
+                    reader.readAsDataURL(file);
+                }
+            });
+        };
+
+        // ===== CARREGAR AVISOS DO MURAL DA CIDADE =====
+        function loadNotices() {
+            const board = document.getElementById('notice-board');
+            board.innerHTML = '';
+            noticesData.forEach((data, index) => {
+                const item = document.createElement('div');
+                const priorityClass = `notice-${data.priority.toLowerCase().replace(/[^a-z0-9]/g, '')}`;
+                item.className = `notice-item ${priorityClass}`;
+                item.innerHTML = `
+                    <span class="notice-priority">${data.priority}</span>
+                    <h4 class="notice-title">${data.title}</h4>
+                    <p class="notice-content">${parseContent(data.content)}</p>
+                    <p class="notice-date">Postado em: ${data.date}</p>
+                `;
+                const buttons = document.createElement('div');
+                buttons.className = 'admin-buttons';
+                const editBtn = document.createElement('button');
+                editBtn.className = 'admin-button';
+                editBtn.textContent = 'Editar';
+                editBtn.setAttribute('aria-label', 'Editar aviso');
+                editBtn.onclick = () => showNoticeForm(index, data);
+                const delBtn = document.createElement('button');
+                delBtn.className = 'admin-button';
+                delBtn.textContent = 'Deletar';
+                delBtn.setAttribute('aria-label', 'Deletar aviso');
+                delBtn.onclick = () => {
+                    if (confirm('Tem certeza que deseja deletar este aviso?')) {
+                        noticesData.splice(index, 1);
+                        localStorage.setItem('notices', JSON.stringify(noticesData));
+                        loadNotices();
+                        showNotification('Aviso deletado com sucesso', 'success');
+                    }
+                };
+                buttons.appendChild(editBtn);
+                buttons.appendChild(delBtn);
+                item.appendChild(buttons);
+                board.appendChild(item);
+            });
+        }
+
+        // ===== FORMULÁRIO DE AVISO (MURAL DA CIDADE) =====
+        window.showNoticeForm = function(index = null, data = {}) {
+            const modal = document.createElement('div');
+            modal.className = 'modal';
+            const contentId = 'notice-content';
+            modal.innerHTML = `
+                <div class="modal-content">
+                    <button class="modal-close" onclick="closeModal()" aria-label="Fechar modal">&times;</button>
+                    <h3 class="modal-header">${index !== null ? 'Editar' : 'Adicionar'} Aviso ao Mural da Cidade</h3>
+                    <form id="notice-form">
+                        <select id="notice-priority" required>
+                            <option value="" disabled selected>Selecione Prioridade</option>
+                            <option value="URGENTE" ${data.priority === 'URGENTE' ? 'selected' : ''}>URGENTE</option>
+                            <option value="IMPORTANTE" ${data.priority === 'IMPORTANTE' ? 'selected' : ''}>IMPORTANTE</option>
+                            <option value="INFORMAÇÃO" ${data.priority === 'INFORMAÇÃO' ? 'selected' : ''}>INFORMAÇÃO</option>
+                            <option value="COMUNIDADE" ${data.priority === 'COMUNIDADE' ? 'selected' : ''}>COMUNIDADE</option>
+                            <option value="EVENTO" ${data.priority === 'EVENTO' ? 'selected' : ''}>EVENTO</option>
+                            <option value="PROCURA-SE" ${data.priority === 'PROCURA-SE' ? 'selected' : ''}>PROCURA-SE</option>
+                        </select>
+                        <input type="text" id="notice-title" placeholder="Título" value="${data.title || ''}" required>
+                        <div class="format-buttons">
+                            <button type="button" class="format-button" onclick="insertTag('${contentId}', '<strong>', '</strong>')">Negrito</button>
+                            <button type="button" class="format-button" onclick="insertTag('${contentId}', '<em>', '</em>')">Itálico</button>
+                            <button type="button" class="format-button" onclick="insertTag('${contentId}', '<span style=\\"font-size:1.5em;\\">', '</span>')">Aumentar Tamanho</button>
+                            <button type="button" class="format-button" onclick="insertTag('${contentId}', '<h5>', '</h5>')">Subtítulo</button>
+                        </div>
+                        <textarea id="${contentId}" placeholder="Conteúdo (use os botões para formatar ou insira tags manualmente)" rows="6" required>${data.content || ''}</textarea>
+                        <input type="text" id="notice-date" placeholder="Data (ex: 30 de Agosto de 2025)" value="${data.date || ''}" required>
+                        <button type="submit">Salvar</button>
+                    </form>
+                </div>
+            `;
+            document.body.appendChild(modal);
+            setTimeout(() => modal.classList.add('show'), 10);
+
+            document.getElementById('notice-form').addEventListener('submit', (e) => {
+                e.preventDefault();
+                const newData = {
+                    priority: document.getElementById('notice-priority').value,
+                    title: document.getElementById('notice-title').value,
+                    content: document.getElementById(contentId).value,
+                    date: document.getElementById('notice-date').value
+                };
+                
+                if (index !== null) {
+                    noticesData[index] = newData;
+                    showNotification('Aviso atualizado com sucesso!', 'success');
+                } else {
+                    noticesData.push(newData);
+                    showNotification('Aviso adicionado com sucesso!', 'success');
+                }
+                localStorage.setItem('notices', JSON.stringify(noticesData));
+                loadNotices();
+                closeModal();
+            });
+
+            modal.addEventListener('click', (e) => { 
+                if (e.target === modal) closeModal(); 
+            });
+        };
+
+        // ===== CARREGAR AVISOS IMPORTANTES =====
+        function loadImportantNotices() {
+            const board = document.getElementById('important-notice-board');
+            board.innerHTML = '';
+            importantNoticesData.forEach((data, index) => {
+                const item = document.createElement('div');
+                const priorityClass = `notice-${data.priority.toLowerCase().replace(/[^a-z0-9]/g, '')}`;
+                item.className = `notice-item ${priorityClass}`;
+                item.innerHTML = `
+                    <span class="notice-priority">${data.priority}</span>
+                    <h4 class="notice-title">${data.title}</h4>
+                    <p class="notice-content">${parseContent(data.content)}</p>
+                    <p class="notice-date">Postado em: ${data.date}</p>
+                `;
+                const buttons = document.createElement('div');
+                buttons.className = 'admin-buttons';
+                const editBtn = document.createElement('button');
+                editBtn.className = 'admin-button';
+                editBtn.textContent = 'Editar';
+                editBtn.setAttribute('aria-label', 'Editar aviso importante');
+                editBtn.onclick = () => showImportantNoticeForm(index, data);
+                const delBtn = document.createElement('button');
+                delBtn.className = 'admin-button';
+                delBtn.textContent = 'Deletar';
+                delBtn.setAttribute('aria-label', 'Deletar aviso importante');
+                delBtn.onclick = () => {
+                    if (confirm('Tem certeza que deseja deletar este aviso importante?')) {
+                        importantNoticesData.splice(index, 1);
+                        localStorage.setItem('importantNotices', JSON.stringify(importantNoticesData));
+                        loadImportantNotices();
+                        showNotification('Aviso importante deletado com sucesso', 'success');
+                    }
+                };
+                buttons.appendChild(editBtn);
+                buttons.appendChild(delBtn);
+                item.appendChild(buttons);
+                board.appendChild(item);
+            });
+        }
+
+        // ===== FORMULÁRIO DE AVISO IMPORTANTE =====
+        window.showImportantNoticeForm = function(index = null, data = {}) {
+            const modal = document.createElement('div');
+            modal.className = 'modal';
+            const contentId = 'important-notice-content';
+            modal.innerHTML = `
+                <div class="modal-content">
+                    <button class="modal-close" onclick="closeModal()" aria-label="Fechar modal">&times;</button>
+                    <h3 class="modal-header">${index !== null ? 'Editar' : 'Adicionar'} Aviso Importante</h3>
+                    <form id="important-notice-form">
+                        <select id="important-notice-priority" required>
+                            <option value="" disabled selected>Selecione Prioridade</option>
+                            <option value="URGENTE" ${data.priority === 'URGENTE' ? 'selected' : ''}>URGENTE</option>
+                            <option value="IMPORTANTE" ${data.priority === 'IMPORTANTE' ? 'selected' : ''}>IMPORTANTE</option>
+                            <option value="INFORMAÇÃO" ${data.priority === 'INFORMAÇÃO' ? 'selected' : ''}>INFORMAÇÃO</option>
+                            <option value="COMUNIDADE" ${data.priority === 'COMUNIDADE' ? 'selected' : ''}>COMUNIDADE</option>
+                            <option value="EVENTO" ${data.priority === 'EVENTO' ? 'selected' : ''}>EVENTO</option>
+                            <option value="PROCURA-SE" ${data.priority === 'PROCURA-SE' ? 'selected' : ''}>PROCURA-SE</option>
+                        </select>
+                        <input type="text" id="important-notice-title" placeholder="Título" value="${data.title || ''}" required>
+                        <div class="format-buttons">
+                            <button type="button" class="format-button" onclick="insertTag('${contentId}', '<strong>', '</strong>')">Negrito</button>
+                            <button type="button" class="format-button" onclick="insertTag('${contentId}', '<em>', '</em>')">Itálico</button>
+                            <button type="button" class="format-button" onclick="insertTag('${contentId}', '<span style=\\"font-size:1.5em;\\">', '</span>')">Aumentar Tamanho</button>
+                            <button type="button" class="format-button" onclick="insertTag('${contentId}', '<h5>', '</h5>')">Subtítulo</button>
+                        </div>
+                        <textarea id="${contentId}" placeholder="Conteúdo (use os botões para formatar ou insira tags manualmente)" rows="6" required>${data.content || ''}</textarea>
+                        <input type="text" id="important-notice-date" placeholder="Data (ex: 30 de Agosto de 2025)" value="${data.date || ''}" required>
+                        <button type="submit">Salvar</button>
+                    </form>
+                </div>
+            `;
+            document.body.appendChild(modal);
+            setTimeout(() => modal.classList.add('show'), 10);
+
+            document.getElementById('important-notice-form').addEventListener('submit', (e) => {
+                e.preventDefault();
+                const newData = {
+                    priority: document.getElementById('important-notice-priority').value,
+                    title: document.getElementById('important-notice-title').value,
+                    content: document.getElementById(contentId).value,
+                    date: document.getElementById('important-notice-date').value
+                };
+                
+                if (index !== null) {
+                    importantNoticesData[index] = newData;
+                    showNotification('Aviso importante atualizado com sucesso!', 'success');
+                } else {
+                    importantNoticesData.push(newData);
+                    showNotification('Aviso importante adicionado com sucesso!', 'success');
+                }
+                localStorage.setItem('importantNotices', JSON.stringify(importantNoticesData));
+                loadImportantNotices();
+                closeModal();
+            });
+
+            modal.addEventListener('click', (e) => { 
+                if (e.target === modal) closeModal(); 
+            });
+        };
+
+        // ===== FUNÇÃO PARA TOGGLE DOS DISTRITOS =====
+        window.toggleDistrict = function(title) {
+            const expanded = title.getAttribute('aria-expanded') === 'true';
+            const content = title.nextElementSibling;
+            const arrow = title.querySelector('.expand-arrow');
+
+            title.setAttribute('aria-expanded', !expanded);
+            if (expanded) {
+                content.style.display = 'none';
+                arrow.classList.remove('expanded');
+            } else {
+                content.style.display = 'block';
+                arrow.classList.add('expanded');
+            }
+        };
+
+        // ===== SISTEMA DE TEMAS =====
+        const themes = {
+            forest: {
+                '--main-bg': '#2e4f2e',
+                '--gradient-bg': 'linear-gradient(135deg, #2e4f2e, #4a7043)',
+                '--border-color': '#8b5a2b',
+                '--shadow-color': '#5c4033',
+                '--text-color': '#f5f5f5',
+                '--accent-color': '#ffcc00',
+                '--secondary-bg': 'rgba(46, 79, 46, 0.8)'
+            },
+            autumn: {
+                '--main-bg': '#8b4513',
+                '--gradient-bg': 'linear-gradient(135deg, #8b4513, #a0522d)',
+                '--border-color': '#654321',
+                '--shadow-color': '#3e2723',
+                '--text-color': '#fff8dc',
+                '--accent-color': '#ffa500',
+                '--secondary-bg': 'rgba(139, 69, 19, 0.8)'
+            },
+            twilight: {
+                '--main-bg': '#4b3c5e',
+                '--gradient-bg': 'linear-gradient(135deg, #4b3c5e, #6a5b7b)',
+                '--border-color': '#6b8299',
+                '--shadow-color': '#4a5c72',
+                '--text-color': '#f5f5f5',
+                '--accent-color': '#ffcc00',
+                '--secondary-bg': 'rgba(75, 60, 94, 0.8)'
+            },
+            night: {
+                '--main-bg': '#2e2e4f',
+                '--gradient-bg': 'linear-gradient(135deg, #2e2e4f, #434370)',
+                '--border-color': '#4a4a72',
+                '--shadow-color': '#1a1a33',
+                '--text-color': '#e6e6fa',
+                '--accent-color': '#9370db',
+                '--secondary-bg': 'rgba(46, 46, 79, 0.8)'
+            },
+            beige: {
+                '--main-bg': '#f5f5dc',
+                '--gradient-bg': 'linear-gradient(135deg, #f5f5dc, #e8d5b9)',
+                '--border-color': '#4a3728',
+                '--shadow-color': '#3c2f24',
+                '--text-color': '#333333',
+                '--accent-color': '#d4a017',
+                '--secondary-bg': 'rgba(245, 245, 220, 0.8)'
+            },
+            oak: {
+                '--main-bg': '#3c2415',
+                '--gradient-bg': 'linear-gradient(135deg, #3c2415, #4a2e1a)',
+                '--border-color': '#8b7355',
+                '--shadow-color': '#2a1a0f',
+                '--text-color': '#f5f5dc',
+                '--accent-color': '#daa520',
+                '--secondary-bg': 'rgba(60, 36, 21, 0.9)'
+            },
+            sand: {
+                '--main-bg': '#f4e4bc',
+                '--gradient-bg': 'linear-gradient(135deg, #f4e4bc, #d9c2a6)',
+                '--border-color': '#6b4e31',
+                '--shadow-color': '#5a3f27',
+                '--text-color': '#333333',
+                '--accent-color': '#e6b800',
+                '--secondary-bg': 'rgba(244, 228, 188, 0.8)'
+            }
+        };
+
+        window.changeTheme = function(themeName) {
+            const theme = themes[themeName];
+            for (const [key, value] of Object.entries(theme)) {
+                document.documentElement.style.setProperty(key, value);
+            }
+            showNotification(`Tema alterado para ${themeName.charAt(0).toUpperCase() + themeName.slice(1)}`, 'success');
+        };
+
+        // ===== SISTEMA DE ABAS =====
+        window.showTab = function(tabName, button) {
+            // Esconder todas as abas
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            document.querySelectorAll('.tab-button').forEach(btn => {
+                btn.classList.remove('active');
+            });
+
+            // Mostrar aba selecionada
+            document.getElementById(tabName).classList.add('active');
+            button.classList.add('active');
+        };
+
+        // ===== GALERIA DE IMAGENS =====
+        window.showGalleryModal = function(type) {
+            const galleryContent = {
+                pergaminho: {
+                    title: 'Pergaminhos Históricos',
+                    content: `
+                        <div class="modal-text">
+                            <p><strong>Pergaminho da Fundação:</strong> Documento original que narra a chegada dos 25 heróis através do portal mágico e a fundação da comunidade.</p>
+                            <br>
+                            <p><strong>Crônicas do Espantalho:</strong> Relatos detalhados da batalha épica contra o espantalho maligno que aterrorizava a vila, escritos pelo bardo Melodias Antigas.</p>
+                            <br>
+                            <p><strong>Tratado de Gargântua:</strong> Acordo comercial e de não-agressão assinado entre o Vale do Espantalho e a poderosa cidade de Gargântua.</p>
+                            <br>
+                            <p><strong>Mapa dos Tesouros Perdidos:</strong> Antigo pergaminho que indica a localização de tesouros escondidos nas proximidades da cidade, descoberto na biblioteca.</p>
+                        </div>
+                    `
+                },
+                bandeiras: {
+                    title: 'Bandeiras do Reino',
+                    content: `
+                        <div class="modal-text">
+                            <p><strong>Bandeira do Vale:</strong> Verde escuro com espantalho dourado ao centro, simbolizando nossa transformação de terror em proteção.</p>
+                            <br>
+                            <p><strong>Estandarte dos Heróis:</strong> Bandeira roxa com 25 estrelas douradas, uma para cada herói que emergiu do portal mágico.</p>
+                            <br>
+                            <p><strong>Bandeira de Gargântua:</strong> Símbolo de nossa aliança, exibida durante eventos diplomáticos e comerciais.</p>
+                            <br>
+                            <p><strong>Gonfalão da Guarda:</strong> Bandeira de guerra da Guarda Municipal, com escudo e espada cruzados sobre fundo vermelho.</p>
+                        </div>
+                    `
+                },
+                arena: {
+                    title: 'Arena em Ação',
+                    content: `
+                        <div class="modal-text">
+                            <p><strong>Arena Central:</strong> Nosso principal local de eventos, construída onde antes ficava a casa do espantalho maligno. Pode acomodar até 500 espectadores.</p>
+                            <br>
+                            <p><strong>Campo de Treino:</strong> Área dedicada ao treinamento diário da Guarda Municipal e preparação para torneios.</p>
+                            <br>
+                            <p><strong>Arena Mágica:</strong> Espaço especial com barreiras anti-magia para competições de magos, localizada próxima à Torre dos Magos.</p>
+                            <br>
+                            <p><strong>Pista de Corrida:</strong> Percurso que atravessa toda a cidade, usado para competições atléticas e treinamento militar.</p>
+                        </div>
+                    `
+                },
+                publico: {
+                    title: 'Público nos Eventos',
+                    content: `
+                        <div class="modal-text">
+                            <p><strong>Cidadãos Locais:</strong> Nossa comunidade sempre comparece em massa para apoiar os competidores e celebrar nossa cultura.</p>
+                            <br>
+                            <p><strong>Visitantes de Gargântua:</strong> Delegações oficiais e curiosos que vêm conhecer nossa próspera cidade.</p>
+                            <br>
+                            <p><strong>Aventureiros Viajantes:</strong> Heróis de outras terras que param aqui durante suas jornadas para participar ou assistir eventos.</p>
+                            <br>
+                            <p><strong>Comerciantes:</strong> Aproveitam os eventos para vender suas mercadorias e fazer novos contatos comerciais.</p>
+                        </div>
+                    `
+                },
+                duelos: {
+                    title: 'Duelos Épicos',
+                    content: `
+                        <div class="modal-text">
+                            <p><strong>Duelo das Lâminas Gêmeas:</strong> Batalha lendária entre os irmãos espadachins Kane e Abel Filogume, que terminou em empate após 4 horas de combate.</p>
+                            <br>
+                            <p><strong>A Vingança do Mago:</strong> Confronto épico entre o Arquimago Mystic e o necromante rebelde Sombra Negra, defendendo a cidade de magias sombrias.</p>
+                            <br>
+                            <p><strong>Desafio do Martelo Trovão:</strong> O ferreiro Ironbeard provou suas habilidades de combate derrotando 5 oponentes consecutivos com seu martelo de guerra encantado.</p>
+                            <br>
+                            <p><strong>Torneio dos Novatos:</strong> Competição especial para aventureiros iniciantes, onde futuros heróis mostram seu potencial pela primeira vez.</p>
+                        </div>
+                    `
+                },
+                celebracao: {
+                    title: 'Celebrações',
+                    content: `
+                        <div class="modal-text">
+                            <p><strong>Festival do Renascimento:</strong> Nossa maior celebração anual, lembrando a transformação da vila devastada em cidade próspera.</p>
+                            <br>
+                            <p><strong>Noite dos Heróis:</strong> Cerimônia solene onde homenageamos aqueles que arriscaram suas vidas para proteger nossa comunidade.</p>
+                            <br>
+                            <p><strong>Festa da Colheita:</strong> Celebração da abundância agrícola com competições de cozinha, degustações e danças tradicionais.</p>
+                            <br>
+                            <p><strong>Baile da Lua Cheia:</strong> Evento social mensal onde cidadãos se reúnem para dançar, socializar e fortalecer os laços comunitários.</p>
+                        </div>
+                    `
+                }
+            };
+
+            const content = galleryContent[type];
+            showModal(content.title, content.content);
+        };
+
+        // ===== FUNÇÕES DE MODAL =====
+        function showModal(title, content) {
+            const modal = document.createElement('div');
+            modal.className = 'modal';
+            modal.innerHTML = `
+                <div class="modal-content">
+                    <button class="modal-close" onclick="closeModal()">&times;</button>
+                    <h3 class="modal-header">${title}</h3>
+                    ${content}
+                </div>
+            `;
+            document.body.appendChild(modal);
+            setTimeout(() => modal.classList.add('show'), 10);
+            
+            // Fechar modal clicando fora
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    closeModal();
+                }
+            });
+            
+            // Fechar modal com ESC
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') {
+                    closeModal();
+                }
+            }, {once: true});
+        }
+
+        window.closeModal = function() {
+            const modal = document.querySelector('.modal');
+            if (modal) {
+                modal.classList.remove('show');
+                setTimeout(() => {
+                    if (modal.parentNode) {
+                        modal.parentNode.removeChild(modal);
+                    }
+                }, 300);
+            }
+        };
+
+        // ===== ATUALIZAÇÃO DA DATA =====
+        function updateCurrentDate() {
+            const today = new Date();
+            const options = { 
+                year: 'numeric', 
+                month: 'long', 
+                day: 'numeric',
+                weekday: 'long'
+            };
+            const dateString = today.toLocaleDateString('pt-BR', options);
+            document.getElementById('current-date').textContent = `Edição de ${dateString}`;
+        }
+
+        // ===== FUNÇÃO PARA ADICIONAR NOVA NOTÍCIA (SIMULAÇÃO) =====
+        window.addBreakingNews = function() {
+            const breakingNews = [
+                {
+                    category: 'ÚLTIMA HORA',
+                    title: 'Comerciante Misterioso Chega à Cidade',
+                    date: new Date().toLocaleDateString('pt-BR'),
+                    content: 'Um comerciante encapuzado chegou hoje pela manhã trazendo mercadorias nunca vistas antes. Alguns cidadãos relatam que seus olhos brilham com luz mágica. Ele montou tenda no mercado central e vende "artefatos de outros mundos".',
+                    image: '🎭'
+                },
+                {
+                    category: 'DESCOBERTA',
+                    title: 'Ruínas Antigas Encontradas',
+                    date: new Date().toLocaleDateString('pt-BR'),
+                    content: 'Escavações para ampliar o celeiro municipal revelaram ruínas de uma civilização anterior. Arqueólogos magos foram chamados para investigar hieróglifos que parecem prever eventos futuros.',
+                    image: '🏛️'
+                },
+                {
+                    category: 'NATUREZA',
+                    title: 'Flores Mágicas Florescem Fora de Época',
+                    date: new Date().toLocaleDateString('pt-BR'),
+                    content: 'Jardins da cidade apresentam floração incomum de "Rosas da Lua" que normalmente só brotam no solstício de inverno. Especialistas investigam se é sinal de mudanças mágicas na região.',
+                    image: '🌹'
+                }
+            ];
+
+            const randomNews = breakingNews[Math.floor(Math.random() * breakingNews.length)];
+            newsData.push(randomNews);
+            localStorage.setItem('news', JSON.stringify(newsData));
+            loadNews();
+            showNotification('NOTÍCIA DE ÚLTIMA HORA ADICIONADA!', 'warning');
+        };
+
+        // ===== NAVEGAÇÃO SUAVE =====
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // ===== EFEITOS INTERATIVOS =====
+        // Animação para os cartões de notícias
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animation = 'slideInFromBottom 0.6s ease-out forwards';
+                }
+            });
+        }, observerOptions);
+
+        // ===== FUNÇÃO ISURL =====
+        function isUrl(str) {
+            return /^https?:\/\//i.test(str) || /^data:image/i.test(str);
+        }
+
+        // ===== COPIAR CÓDIGO =====
+        window.copyPageCode = function() {
+            const pageCode = document.documentElement.outerHTML;
+            navigator.clipboard.writeText(pageCode).then(() => {
+                showNotification('Código da página copiado para a área de transferência!', 'success');
+            }).catch(() => {
+                showNotification('Erro ao copiar o código.', 'error');
+            });
+        };
+
+        // ===== INICIALIZAÇÃO =====
+        document.addEventListener('DOMContentLoaded', () => {
+            // Aplicar tema padrão
+            changeTheme('forest');
+            
+            // Atualizar data atual
+            updateCurrentDate();
+            
+            // Mostrar notificação de boas-vindas
+            setTimeout(() => {
+                showNotification('Bem-vindos ao Centro de Informações!', 'success');
+            }, 1000);
+
+            // Seed data if empty
+            seedData();
+
+            // Carregar dados
+            loadNews();
+            loadEvents('futuros');
+            loadEvents('passados');
+            loadEvents('torneios');
+            loadEvents('lutas');
+            loadNotices();
+            loadImportantNotices();
+
+            // Observar elementos quando a página carrega
+            setTimeout(() => {
+                document.querySelectorAll('.news-article, .event-card, .notice-item, .gallery-item, .district-card').forEach(el => {
+                    observer.observe(el);
+                });
+            }, 500);
+        });
+
+        // Tornar funções globais
+        window.showNotification = showNotification;
+        window.loadNews = loadNews;
+        window.loadEvents = loadEvents;
+    </script>
+</body>
+</html>
