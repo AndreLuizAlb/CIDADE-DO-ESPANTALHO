@@ -1,1 +1,359 @@
-HTML
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cidade do Espantalho</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    * {
+      transition: background-color 0.4s ease, color 0.4s ease, border-color 0.4s ease;
+    }
+
+    /* Paleta baseada na imagem medieval */
+    :root {
+      --cor-pedra: #d1b17a;
+      --cor-pedra-clara: #f3e6cc;
+      --cor-telhado: #c56a45;
+      --cor-telhado-escuro: #a3452f;
+      --cor-verde: #486b3c;
+      --cor-ceu: #5da3d3;
+      --cor-ceu-claro: #87c5e0;
+      --cor-escuro: #2e2e2e;
+    }
+  </style>
+</head>
+<body class="bg-[var(--cor-pedra-clara)] text-[var(--cor-escuro)] font-sans">
+
+  <!-- NAVBAR -->
+  <header class="absolute top-0 left-0 w-full bg-[var(--cor-telhado-escuro)]/95 text-white z-50 shadow-lg">
+    <div class="max-w-6xl mx-auto flex items-center justify-between px-6 py-4">
+      <h1 class="text-2xl font-bold">Cidade do Espantalho</h1>
+      <nav class="space-x-6">
+        <a href="#aventureiros" class="hover:text-[var(--cor-ceu-claro)]">Aventureiros</a>
+        <a href="#missoes" class="hover:text-[var(--cor-ceu-claro)]">Missões</a>
+        <a href="#exploracoes" class="hover:text-[var(--cor-ceu-claro)]">Explorações</a>
+        <a href="#conquistas" class="hover:text-[var(--cor-ceu-claro)]">Conquistas</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="h-screen w-full relative">
+    <img src="imagens/cidade_do_espantalho.png" alt="Cidade do Espantalho" class="w-full h-full object-cover">
+    <div class="absolute inset-0 bg-[var(--cor-escuro)]/40"></div>
+  </section>
+
+  <!-- AVENTUREIROS -->
+  <section id="aventureiros" class="py-16 bg-[var(--cor-pedra)]">
+    <div class="max-w-6xl mx-auto px-6 text-center">
+      <h2 class="text-4xl font-bold mb-12 text-[var(--cor-escuro)]">Aventureiros</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+
+        <div class="bg-white p-6 rounded-xl shadow-lg text-left border-t-4 border-[var(--cor-telhado)]">
+          <h3 class="text-2xl font-semibold mb-2 text-[var(--cor-telhado-escuro)]">Líder do Centro de Operações</h3>
+          <p class="text-lg font-bold">Lucas Mendes</p>
+          <p class="text-gray-700 mt-2">Responsável por organizar as tarefas atribuídas ao centro de operações e distribuir as tarefas entre os membros.</p>
+        </div>
+
+        <div class="bg-white p-6 rounded-xl shadow-lg text-left border-t-4 border-[var(--cor-verde)]">
+          <h3 class="text-2xl font-semibold mb-2 text-[var(--cor-verde)]">Membro</h3>
+          <p class="text-lg font-bold">Guilherme Leitão</p>
+          <p class="text-gray-700 mt-2">Responsável pelas tarefas que o líder atribuir a ele.</p>
+        </div>
+
+        <div class="bg-white p-6 rounded-xl shadow-lg text-left border-t-4 border-[var(--cor-telhado)]">
+          <h3 class="text-2xl font-semibold mb-2 text-[var(--cor-telhado-escuro)]">Membro</h3>
+          <p class="text-lg font-bold">Lucas Souza</p>
+          <p class="text-gray-700 mt-2">Responsável pelas tarefas que o líder atribuir a ele.</p>
+        </div>
+
+        <div class="bg-white p-6 rounded-xl shadow-lg text-left border-t-4 border-[var(--cor-verde)]">
+          <h3 class="text-2xl font-semibold mb-2 text-[var(--cor-verde)]">Membro</h3>
+          <p class="text-lg font-bold">Raika Oliveira</p>
+          <p class="text-gray-700 mt-2">Responsável pelas tarefas que o líder atribuir a ele.</p>
+        </div>
+
+        <div class="bg-white p-6 rounded-xl shadow-lg text-left border-t-4 border-[var(--cor-telhado)]">
+          <h3 class="text-2xl font-semibold mb-2 text-[var(--cor-telhado-escuro)]">Membro</h3>
+          <p class="text-lg font-bold">Richard Oliveira</p>
+          <p class="text-gray-700 mt-2">Responsável pelas tarefas que o líder atribuir a ele.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- MISSÕES -->
+  <section id="missoes" class="py-16 bg-[var(--cor-pedra)]">
+  <div class="max-w-6xl mx-auto px-6">
+    <h2 class="text-4xl font-bold mb-12 text-center text-[var(--cor-escuro)]">Missões</h2>
+    <div id="quadro" class="grid grid-cols-1 md:grid-cols-2 gap-10">
+
+      <!-- Verde -->
+      <div class="bg-[var(--cor-pedra-clara)] rounded-2xl shadow-xl border border-[var(--cor-verde)]" data-missao="Artificer e Mago">
+        <div class="bg-[var(--cor-verde)] text-white px-6 py-3 font-bold text-xl">
+          Artificer e Mago — O Arquiteto da Cidade
+        </div>
+        <div class="p-8">
+          <p class="text-gray-700 mb-2"><strong>Participantes:</strong> 3 pessoas</p>
+          <p class="text-gray-700">Estruturar o dicionário de tabelas que define como os bancos irão funcionar. A apresentação visual deve conter todos os dicionários utilizados na cidade.</p>
+          <ul class="participantes list-disc pl-6 text-gray-700 mt-4"></ul>
+        </div>
+      </div>
+
+      <!-- Vermelho -->
+      <div class="bg-[var(--cor-pedra-clara)] rounded-2xl shadow-xl border border-[var(--cor-telhado-escuro)]" data-missao="Cavaleiro">
+        <div class="bg-[var(--cor-telhado-escuro)] text-white px-6 py-3 font-bold text-xl">
+          Cavaleiro — Colocando Ordem
+        </div>
+        <div class="p-8">
+          <p class="text-gray-700 mb-2"><strong>Participantes:</strong> 4 pessoas</p>
+          <p class="text-gray-700">Garantir que todos os dados e páginas das pessoas estejam atualizados, além de implementar um meio de atualização otimizado.</p>
+          <ul class="participantes list-disc pl-6 text-gray-700 mt-4"></ul>
+        </div>
+      </div>
+
+      <!-- Vermelho -->
+      <div class="bg-[var(--cor-pedra-clara)] rounded-2xl shadow-xl border border-[var(--cor-telhado-escuro)]" data-missao="Mercador">
+        <div class="bg-[var(--cor-telhado-escuro)] text-white px-6 py-3 font-bold text-xl">
+          Mercador — Potência
+        </div>
+        <div class="p-8">
+          <p class="text-gray-700 mb-2"><strong>Participantes:</strong> 1 pessoa</p>
+          <p class="text-gray-700">Obter 15 moedas nesta semana.</p>
+          <ul class="participantes list-disc pl-6 text-gray-700 mt-4"></ul>
+        </div>
+      </div>
+
+      <!-- Verde -->
+      <div class="bg-[var(--cor-pedra-clara)] rounded-2xl shadow-xl border border-[var(--cor-verde)]" data-missao="Herói">
+        <div class="bg-[var(--cor-verde)] text-white px-6 py-3 font-bold text-xl">
+          Herói — Inquebrável
+        </div>
+        <div class="p-8">
+          <p class="text-gray-700 mb-2"><strong>Participantes:</strong> Grupo do herói (até 8 pessoas)</p>
+          <p class="text-gray-700">Nenhum integrante do grupo do herói pode morrer nesta semana.</p>
+          <ul class="participantes list-disc pl-6 text-gray-700 mt-4"></ul>
+        </div>
+      </div>
+
+      <!-- Verde -->
+      <div class="bg-[var(--cor-pedra-clara)] rounded-2xl shadow-xl border border-[var(--cor-verde)]" data-missao="Artificer Bonus Nossas Honras">
+        <div class="bg-[var(--cor-verde)] text-white px-6 py-3 font-bold text-xl">
+          Artificer Bonus — Nossas Honras
+        </div>
+        <div class="p-8">
+          <p class="text-gray-700 mb-2"><strong>Participantes:</strong> 1 pessoa</p>
+          <p class="text-gray-700">Criar medalhas para todas as conquistas já obtidas: Espantalho, Rei Goblin, Aracne, Arena e os 3 desafios da semana passada.</p>
+          <p class="text-gray-700"><strong>Limite:</strong> Até nível 3 e sem essência (nível 3 não evolui)</p>
+          <ul class="participantes list-disc pl-6 text-gray-700 mt-4"></ul>
+        </div>
+      </div>
+
+      <!-- Verde -->
+      <div class="bg-[var(--cor-pedra-clara)] rounded-2xl shadow-xl border border-[var(--cor-verde)]" data-missao="Artificer Bonus Comemoração">
+        <div class="bg-[var(--cor-verde)] text-white px-6 py-3 font-bold text-xl">
+          Artificer Bonus — Comemoração
+        </div>
+        <div class="p-8">
+          <p class="text-gray-700 mb-2"><strong>Participantes:</strong> 1 pessoa</p>
+          <p class="text-gray-700">Criar uma tela de recompensas para os itens do chefe.</p>
+          <p class="text-gray-700"><strong>Limite:</strong> Até nível 3 ou essência (nível 3 não evolui)</p>
+          <ul class="participantes list-disc pl-6 text-gray-700 mt-4"></ul>
+        </div>
+      </div>
+
+      <!-- Vermelho -->
+      <div class="bg-[var(--cor-pedra-clara)] rounded-2xl shadow-xl border border-[var(--cor-telhado-escuro)]" data-missao="Cavaleiro Bonus Elo dos Pedidos">
+        <div class="bg-[var(--cor-telhado-escuro)] text-white px-6 py-3 font-bold text-xl">
+          Cavaleiro Bonus — Elo dos Pedidos
+        </div>
+        <div class="p-8">
+          <p class="text-gray-700 mb-2"><strong>Participantes:</strong> Todos que quiserem entrar na missão</p>
+          <p class="text-gray-700">Para participar, cada um deverá falar com Gustavo, que fará o sorteio dos grupos.</p>
+          <p class="text-gray-700"><strong>Limite:</strong> Até nível 3 e sem essência (nível 3 não evolui)</p>
+          <ul class="participantes list-disc pl-6 text-gray-700 mt-4"></ul>
+        </div>
+      </div>
+
+      <!-- Verde -->
+      <div class="bg-[var(--cor-pedra-clara)] rounded-2xl shadow-xl border border-[var(--cor-verde)]" data-missao="Mago Bonus Estudo Dirigido das Normas">
+        <div class="bg-[var(--cor-verde)] text-white px-6 py-3 font-bold text-xl">
+          Mago Bonus — Estudo Dirigido das Normas
+        </div>
+        <div class="p-8">
+          <p class="text-gray-700 mb-2"><strong>Participantes:</strong> 3 pessoas</p>
+          <p class="text-gray-700">Realizar um estudo sobre as normas da ABNT e apresentar um esqueleto completo, incluindo regras de referência durante o texto e a bibliografia.</p>
+          <p class="text-gray-700"><strong>Recompensa:</strong> Pode ganhar essência</p>
+          <p class="text-gray-700"><strong>Limite:</strong> Até nível 4 ou essência (nível 4 não evolui)</p>
+          <ul class="participantes list-disc pl-6 text-gray-700 mt-4"></ul>
+        </div>
+      </div>
+
+      <!-- Verde -->
+      <div class="bg-[var(--cor-pedra-clara)] rounded-2xl shadow-xl border border-[var(--cor-verde)]" data-missao="Mago Bonus A Obra do Git">
+        <div class="bg-[var(--cor-verde)] text-white px-6 py-3 font-bold text-xl">
+          Mago Bonus — A Obra do Git
+        </div>
+        <div class="p-8">
+          <p class="text-gray-700 mb-2"><strong>Participantes:</strong> 2 pessoas</p>
+          <p class="text-gray-700">Criar um exemplo prático, desenvolvendo novas branches e realizando merges funcionais.</p>
+          <p class="text-gray-700"><strong>Limite:</strong> Até nível 3 e sem essência (nível 3 não evolui)</p>
+          <ul class="participantes list-disc pl-6 text-gray-700 mt-4"></ul>
+        </div>
+      </div>
+
+      <!-- Verde -->
+      <div class="bg-[var(--cor-pedra-clara)] rounded-2xl shadow-xl border border-[var(--cor-verde)]" data-missao="Mercador Bonus Seu Grande Leilão">
+        <div class="bg-[var(--cor-verde)] text-white px-6 py-3 font-bold text-xl">
+          Mercador Bonus — Seu Grande Leilão
+        </div>
+        <div class="p-8">
+          <p class="text-gray-700 mb-2"><strong>Participantes:</strong> 1 pessoa</p>
+          <p class="text-gray-700">Leiloar 1 item que alcance, no mínimo, 5 moedas.</p>
+          <p class="text-gray-700"><strong>Limite:</strong> Até nível 3 e sem essência (nível 3 não evolui)</p>
+          <ul class="participantes list-disc pl-6 text-gray-700 mt-4"></ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+  <!-- FORMULÁRIOS -->
+  <section class="py-16 bg-[var(--cor-pedra-clara)]">
+    <div class="max-w-4xl mx-auto px-6 space-y-10">
+
+      <!-- Formulário -->
+      <div class="bg-white p-8 rounded-2xl shadow-lg border border-[var(--cor-pedra)]">
+        <h3 class="text-2xl font-semibold mb-4 text-[var(--cor-telhado-escuro)]">Entrar em uma Missão</h3>
+        <form id="formMissao" class="space-y-4">
+          <input type="text" id="nome" placeholder="Seu nome" class="w-full p-3 border rounded-lg focus:ring-2 focus:ring-[var(--cor-telhado)]" required>
+          <select id="missao" class="w-full p-3 border rounded-lg focus:ring-2 focus:ring-[var(--cor-verde)]" required>
+            <option value="">Selecione a missão</option>
+            <option value="Artificer e Mago">Artificer e Mago: O Arquiteto da Cidade</option>
+            <option value="Cavaleiro">Cavaleiro: Colocando Ordem</option>
+            <option value="Mercador">Mercador: Potência</option>
+            <option value="Herói">Herói: Inquebrável</option>
+            <option value="Artificer Bonus Nossas Honras">Artificer Bonus: Nossas Honras</option>
+            <option value="Artificer Bonus Comemoração">Artificer Bonus: Comemoração</option>
+            <option value="Cavaleiro Bonus Elo dos Pedidos">Cavaleiro Bonus: Elo dos Pedidos</option>
+            <option value="Mago Bonus Estudo Dirigido das Normas">Mago Bonus: Estudo Dirigido das Normas</option>
+            <option value="Mago Bonus A Obra do Git">Mago Bonus: A Obra do Git</option>
+            <option value="Mercador Bonus Seu Grande Leilão">Mercador Bonus: Seu Grande Leilão</option>
+          </select>
+          <button type="submit" class="bg-[var(--cor-telhado)] text-white px-6 py-3 rounded-lg shadow hover:bg-[var(--cor-telhado-escuro)]">Participar</button>
+        </form>
+      </div>
+
+      <!-- Botão Resetar -->
+      <div class="text-center">
+        <button id="resetar" class="bg-[var(--cor-verde)] text-white px-6 py-3 rounded-lg shadow hover:bg-green-900">Resetar Todas as Missões</button>
+      </div>
+
+      <!-- Sugestões -->
+      <div class="bg-white p-8 rounded-2xl shadow-lg border border-[var(--cor-pedra)]">
+        <h3 class="text-2xl font-semibold mb-4 text-[var(--cor-telhado-escuro)]">Sugerir Nova Missão</h3>
+        <form id="formSugestao" class="space-y-4">
+          <input type="text" id="sugestaoNome" placeholder="Seu nome" class="w-full p-3 border rounded-lg focus:ring-2 focus:ring-[var(--cor-telhado)]" required>
+          <textarea id="sugestaoMissao" placeholder="Descreva a missão sugerida" class="w-full p-3 border rounded-lg h-32 focus:ring-2 focus:ring-[var(--cor-verde)]" required></textarea>
+          <button type="submit" class="bg-[var(--cor-verde)] text-white px-6 py-3 rounded-lg shadow hover:bg-green-900">Enviar Sugestão</button>
+        </form>
+      </div>
+
+      <div class="bg-white p-8 rounded-2xl shadow-lg border border-[var(--cor-pedra)]">
+        <h3 class="text-2xl font-semibold mb-4 text-[var(--cor-telhado-escuro)]">Missões Sugeridas</h3>
+        <ul id="listaSugestoes" class="list-disc pl-6 text-gray-700"></ul>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- SCRIPT -->
+  <script>
+    const form = document.getElementById("formMissao");
+    const formSugestao = document.getElementById("formSugestao");
+    const resetarBtn = document.getElementById("resetar");
+
+    function salvarDados() {
+      const dados = {};
+      document.querySelectorAll("[data-missao]").forEach(card => {
+        const nomeMissao = card.dataset.missao;
+        const participantes = Array.from(card.querySelectorAll(".participantes li")).map(li => li.textContent);
+        dados[nomeMissao] = participantes;
+      });
+      localStorage.setItem("missoes", JSON.stringify(dados));
+    }
+
+    function carregarDados() {
+      const dados = JSON.parse(localStorage.getItem("missoes") || "{}");
+      Object.keys(dados).forEach(missao => {
+        const card = document.querySelector(`[data-missao='${missao}']`);
+        if (card) {
+          const ul = card.querySelector(".participantes");
+          dados[missao].forEach(nome => {
+            const li = document.createElement("li");
+            li.textContent = nome;
+            ul.appendChild(li);
+          });
+        }
+      });
+
+      const sugestoes = JSON.parse(localStorage.getItem("sugestoes") || "[]");
+      sugestoes.forEach(s => {
+        const li = document.createElement("li");
+        li.textContent = s;
+        document.getElementById("listaSugestoes").appendChild(li);
+      });
+    }
+
+    form.addEventListener("submit", e => {
+      e.preventDefault();
+      const nome = document.getElementById("nome").value.trim();
+      const missao = document.getElementById("missao").value;
+
+      if (!nome || !missao) return;
+
+      const card = document.querySelector(`[data-missao='${missao}'] .participantes`);
+      const li = document.createElement("li");
+      li.textContent = nome;
+      card.appendChild(li);
+
+      salvarDados();
+      form.reset();
+    });
+
+    formSugestao.addEventListener("submit", e => {
+      e.preventDefault();
+      const nome = document.getElementById("sugestaoNome").value.trim();
+      const missao = document.getElementById("sugestaoMissao").value.trim();
+
+      if (!nome || !missao) return;
+
+      const sugestao = `${nome} sugeriu: ${missao}`;
+      const li = document.createElement("li");
+      li.textContent = sugestao;
+      document.getElementById("listaSugestoes").appendChild(li);
+
+      const sugestoes = JSON.parse(localStorage.getItem("sugestoes") || "[]");
+      sugestoes.push(sugestao);
+      localStorage.setItem("sugestoes", JSON.stringify(sugestoes));
+
+      formSugestao.reset();
+    });
+
+    resetarBtn.addEventListener("click", () => {
+      if (confirm("Tem certeza que deseja resetar todas as missões e sugestões?")) {
+        localStorage.clear();
+        document.querySelectorAll(".participantes").forEach(ul => ul.innerHTML = "");
+        document.getElementById("listaSugestoes").innerHTML = "";
+      }
+    });
+
+    carregarDados();
+  </script>
+
+</body>
+</html>
